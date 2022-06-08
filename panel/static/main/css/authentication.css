@@ -1,0 +1,42 @@
+.authentication-wrapper{
+    padding: 2rem;
+}
+
+.form-selector{
+    border-bottom: 2px solid #dee2e6;
+    height: 4em;
+    text-align: center;
+    padding: 1em;
+
+}
+
+.form-button-row :first-child{
+    border-right: 1px solid #dee2e6;
+}
+
+.form-selector.active{
+    background: #0c5460;
+    color: #dee2e6;
+}
+
+form.active{
+    display: block;
+}
+
+form.inactive{
+    display: none;
+}
+
+.card {
+}
+
+form{
+    padding: 1em;
+}
+
+@media only screen and (max-width: 500px) {
+    .g-recaptcha {
+        transform:scale(0.77);
+        transform-origin:0 0;
+    }
+}

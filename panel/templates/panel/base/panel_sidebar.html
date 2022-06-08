@@ -1,0 +1,80 @@
+<nav id="sidebar">
+			<div class="container">
+				<div class="row">
+					<div class="col-9 sidebar-header">
+				 		<h3>Sidebar Header</h3>
+					</div>
+					<div class="col sidebar-header sidebar-toggle">
+						<i class="fa-solid fa-chevron-left"></i>
+					</div>
+				</div>
+			</div>
+	<ul class="list-unstyled components">
+		<p>Dummy Heading</p>
+		<li class="active">
+			<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
+			<ul class="collapse list-unstyled" id="homeSubmenu">
+				<li>
+					<a href="#">Home 1</a>
+				</li>
+				<li>
+					<a href="#">Home 2</a>
+				</li>
+				<li>
+					<a href="#">Home 3</a>
+				</li>
+			</ul>
+		</li>
+		<li>
+
+			<a href="{%url 'panel'%}dashboard"><i class="fa-solid fa-gauge"></i>Dashboard</a>
+		</li>
+		<li>
+			<a href="#doctorsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa-solid fa-user-doctor"></i>Doctors</a>
+			<ul class="collapse list-unstyled" id="doctorsSubmenu">
+				<li>
+					<a href="{% url 'doctors' %}">Doctors List</a>
+				</li>
+				<li>
+					<a href="{% url 'add_doctor' %}">Add a New Doctor</a>
+				</li>
+			</ul>
+		</li>
+		<li>
+			<a href="#prescriptionsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa-solid fa-prescription-bottle"></i>Prescriptions</a>
+			<ul class="collapse list-unstyled" id="prescriptionsSubmenu">
+				<li>
+					<a href="{% url 'prescriptions' %}">Prescriptions List</a>
+				</li>
+				<li>
+					<a href="{% url 'add_prescription' %}">Add a New Prescription</a>
+				</li>
+			</ul>
+		</li>
+		<li>
+			<a href="#reportsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa-solid fa-flask"></i>Reports</a>
+			<ul class="collapse list-unstyled" id="reportsSubmenu">
+				<li>
+					<a href="{% url 'reports' %}">Reports List</a>
+				</li>
+				<li>
+					<a href="{% url 'add_report' %}">Add a New Report</a>
+				</li>
+			</ul>
+		</li>
+		<li>
+			<a href="#patientsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa-solid fa-bed"></i>Patients</a>
+			<ul class="collapse list-unstyled" id="patientsSubmenu">
+				<li>
+					<a href="{% url 'patients' %}">Patients List</a>
+				</li>
+				<li>
+					<a href="{% url 'add_patient' %}">Add a New Patient</a>
+				</li>
+			</ul>
+		</li>
+		<li>
+			<a href="#">Contact</a>
+		</li>
+	</ul>
+</nav>

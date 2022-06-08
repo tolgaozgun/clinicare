@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% block title %}<title>Clinic Template</title>{% endblock %}
+
+    <!-- Bootstrap -->
+      {%  load static %}
+    <link href="{% static 'base/css/bootstrap-4.4.1.css' %}" rel="stylesheet">
+	<link href="{% static 'panel/css/styles.css' %}" rel="stylesheet">
+	<link href="{% static 'base/fontawesome/css/all.css' %}" rel="stylesheet">
+    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
+
+  </head>
+  <body>
+	<div class="wrapper">
+        {% block sidebar %}
+            {% include "panel/base/panel_sidebar.html" %}
+        {% endblock %}
+
+        <div class="right-wrapper">
+            {% block navbar %}
+                {% include 'panel/base/panel_navbar.html' %}
+            {% endblock %}
+
+            {% block content %}
+                {% include 'panel/base/panel_base_content.html' %}
+            {% endblock %}
+        </div>
+	</div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="{% static 'base/js/jquery-3.4.1.min.js' %}">
+
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="{% static 'base/js/popper.min.js' %}"></script>
+    <script src="{% static 'base/js/bootstrap-4.4.1.js' %}"></script>
+  </body>
+</html>

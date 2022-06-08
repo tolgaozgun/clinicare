@@ -1,0 +1,75 @@
+{% extends 'panel/base/panel_base_index.html' %}
+
+{% block title %}
+<title>Doctor - Tolga's Clinic</title>
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-3">
+                <div class="card photo-card">
+                    <div class="card-img">
+                        {% load static %}
+                        <img class="img-fluid" src="{{ doctor.photo.url }}">
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="card" style="padding:1em">
+                    {% if is_valid == False %}
+                        <h3 class="card-title" style="padding:0.5em">Doctor Not Found</h3>
+                    {% endif %}
+                        <div class="row">
+                            <p class="col-sm-5">Name:</p>
+                            <p class="col-sm-5">{{ doctor.name }}</p>
+                        </div>
+                        <div class="row">
+                            <p class="col-sm-5">Surname:</p>
+                            <p class="col-sm-5">{{ doctor.surname }}</p>
+                        </div>
+                        <div class="row">
+                            <p class="col-sm-5">Email:</p>
+                            <p class="col-sm-5">{{ doctor.email }}</p>
+                        </div>
+                        <div class="row">
+                            <p class="col-sm-5">Phone:</p>
+                            <p class="col-sm-5">{{ doctor.phone }}</p>
+                        </div>
+                        <div class="row">
+                            <p class="col-sm-5">Role:</p>
+                            <p class="col-sm-5">{{ doctor.role }}</p>
+                        </div>
+                        <div class="row">
+                            <p class="col-sm-5">Department:</p>
+                            <p class="col-sm-5">{{ doctor.department }}</p>
+                        </div>
+                        <div class="row">
+                            <p class="col-sm-5">Status:</p>
+                            <p class="col-sm-5">{{ doctor.status }}</p>
+                        </div>
+                        <div class="row">
+                            <p class="col-sm-5">Account Activated:</p>
+                            <p class="col-sm-5">{{ doctor.isActivated }}</p>
+                        </div>
+                        <div class="row">
+                            <p class="col-sm-5">2FA Enabled:</p>
+                            <p class="col-sm-5">{{ doctor.is2FAEnabled }}</p>
+                        </div>
+                        <div class="row">
+                            <p class="col-sm-5">Last Login:</p>
+                            <p class="col-sm-5">{{ doctor.lastLogin }}</p>
+                        </div>
+                        <div class="row">
+                            <p class="col-sm-5">Account Created:</p>
+                            <p class="col-sm-5">{{ doctor.dateCreated }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+
+        </div>
+    </div>
+{% endblock %}

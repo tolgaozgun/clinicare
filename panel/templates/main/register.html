@@ -1,0 +1,82 @@
+{% extends "main/main_base_index.html" %}
+
+{% block title %}
+    <title>Register - Tolga's Clinic</title>
+{% endblock %}
+
+{% block content %}
+    <div class="authentication-wrapper">
+        <div class="container">
+            <div class="row justify-content-center">
+                    <div class="card col-md-8">
+                        <div class="row">
+                            <span>Registration Form</span>
+                        </div>
+                        <div class="row form-button-row">
+                            <div class="form-selector active col-md-6" onclick="switchForm(0)">Patient</div>
+                            <div class="form-selector col-md-6" onclick="switchForm(1)">Doctor</div>
+                        </div>
+                        <form class="active" method="POST" action="">
+                            {% csrf_token %}
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    {{ form.name.errors }}
+                                    <label for="{{ form.name.id_for_label }}">First Name</label>
+                                    {{ form.name }}
+                                </div>
+                                <div class="form-group col-md-6">
+                                    {{ form.surname.errors }}
+                                    <label for="{{ form.surname.id_for_label }}">Last Name</label>
+                                    {{ form.surname }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form.email.errors }}
+                                <label for="{{ form.email.id_for_label }}">Email Address</label>
+                                {{ form.email }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.confirmEmail.errors }}
+                                <label for="{{ form.confirmEmail.id_for_label }}">Confirm Email Address</label>
+                                {{ form.confirmEmail }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.phone.errors }}
+                                <label for="{{ form.phone.id_for_label }}">Phone Number</label>
+                                {{ form.phone }}
+                            </div>
+                            <div class="form-row form-group">
+                                {{ form.password.errors }}
+                                <label for="{{ form.password.id_for_label }}">Password</label>
+                                {{ form.password }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.confirmPassword.errors }}
+                                <label for="{{ form.confirmPassword.id_for_label }}">Confirm Password</label>
+                                {{ form.confirmPassword }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.captcha.errors }}
+                                <label for="{{ form.captcha.id_for_label }}">Captcha</label>
+                                {{ form.captcha }}
+                            </div>
+                            <button class="btn btn-primary btn-block waves-effect waves-light" type="submit">Register</button>
+                        </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extracss %}
+    {% load static %}
+	<link href="{% static 'main/css/authentication.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block extrajs %}
+    {% load static %}
+    <script src="{% static 'main/js/authentication.js' %}"></script>
+
+{% endblock %}
