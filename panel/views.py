@@ -4,7 +4,7 @@ from django.shortcuts import render, HttpResponseRedirect, redirect
 from django.utils.timezone import now
 from django.views import View
 from .models import User, Prescription, Report
-from .forms import RegisterForm, LoginForm
+from .forms import RegisterForm, LoginForm, PrescriptionForm, ReportForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import make_password, check_password
 from django.contrib.auth import authenticate, login, logout
@@ -192,8 +192,6 @@ class RegisterView(View):
     def post(self, request):
         form = RegisterForm(request.POST)
         # doctor_form = RegisterDoctorForm(request.POST)
-        print("Action is")
-        print(request.POST['action'])
 
         if form.is_valid():
             password_hashed = make_password(form.cleaned_data['password'])
@@ -211,7 +209,7 @@ class RegisterView(View):
                                lastUpdated=now,
                                dateCreated=now)
             new_patient.save()
-            return HttpResponseRedirect('')
+            return redirect("index")
         else:
             return render(request, "main/register.html", {'form': form})
 
@@ -221,6 +219,99 @@ class IndexView(View):
         return render(request, 'main/index.html')
 
 
+class AddPatientView(View):
+    def get(self, request):
+        form = RegisterForm()
+        return render(request, 'panel/add_patient.html', {'form': form})
+
+    def post(self, request):
+        form = RegisterForm(request.POST)
+        # doctor_form = RegisterDoctorForm(request.POST)
+
+        if form.is_valid():
+            password_hashed = make_password(form.cleaned_data['password'])
+            new_patient = User(name=form.cleaned_data['name'],
+                               surname=form.cleaned_data['surname'],
+                               email=form.cleaned_data['email'],
+                               phone=form.cleaned_data['phone'],
+                               status=1,
+                               role=PATIENT_ROLE,
+                               photo=None,
+                               password=password_hashed,
+                               isActivated=False,
+                               is2FAEnabled=False,
+                               lastLogin=None,
+                               lastUpdated=now,
+                               dateCreated=now)
+            new_patient.save()
+            return redirect('panel')
+        else:
+            return render(request, "panel/add_patient.html", {'form': form})
+
+
 class AddDoctorView(View):
     def get(self, request):
-        return render(request, "panel/add_doctor.html")
+        form = RegisterForm()
+        return render(request, 'panel/add_doctor.html', {'form': form})
+
+    def post(self, request):
+        form = RegisterForm(request.POST)
+        # doctor_form = RegisterDoctorForm(request.POST)
+
+        if form.is_valid():
+            password_hashed = make_password(form.cleaned_data['password'])
+            new_patient = User(name=form.cleaned_data['name'],
+                               surname=form.cleaned_data['surname'],
+                               email=form.cleaned_data['email'],
+                               phone=form.cleaned_data['phone'],
+                               status=1,
+                               role=DOCTOR_ROLE,
+                               photo=None,
+                               password=password_hashed,
+                               isActivated=False,
+                               is2FAEnabled=False,
+                               lastLogin=None,
+                               lastUpdated=now,
+                               dateCreated=now)
+            new_patient.save()
+            return redirect('panel')
+        else:
+            return render(request, "panel/add_doctor.html", {'form': form})
+
+
+class AddReportView(View):
+    def get(self, request):
+        form = ReportForm()
+        return render(request, 'panel/add_report.html', {'form': form})
+
+    def post(self, request):
+        form = ReportForm(request.POST)
+        # doctor_form = RegisterDoctorForm(request.POST)
+
+        if form.is_valid():
+            new_report = Report(**form.cleaned_data,
+                                dateCreated=now,
+                                lastUpdated=now)
+            new_report.save()
+            return redirect('panel')
+        else:
+            return render(request, "panel/add_report.html", {'form': form})
+
+
+class AddPrescriptionView(View):
+    def get(self, request):
+        form = PrescriptionForm()
+        return render(request, 'panel/add_prescription.html', {'form': form})
+
+    def post(self, request):
+        form = PrescriptionForm(request.POST)
+        # doctor_form = RegisterDoctorForm(request.POST)
+
+        if form.is_valid():
+            new_prescription = Prescription(**form.cleaned_data,
+                                            dateCreated=now,
+                                            lastUpdated=now)
+            new_prescription.save()
+            return redirect('panel')
+        else:
+            return render(request, "panel/add_prescription.html", {'form': form})

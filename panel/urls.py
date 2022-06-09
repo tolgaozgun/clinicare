@@ -1,7 +1,8 @@
 from django.urls import path
 
 from .views import DashboardView, PrescriptionsView, DoctorsView, ReportsView, PatientsView, LoginView, RegisterView, \
-    IndexView, LogoutView, DoctorView, PatientView, PrescriptionView, ReportView, AddDoctorView
+    IndexView, LogoutView, DoctorView, PatientView, PrescriptionView, ReportView, AddDoctorView, AddPatientView, \
+    AddPrescriptionView, AddReportView
 
 urlpatterns = [
     path("", IndexView.as_view(), name="index"),
@@ -14,11 +15,11 @@ urlpatterns = [
     path("panel/doctors/<int:pk>", DoctorView.as_view(), name="doctor"),
     path("panel/doctors/new", AddDoctorView.as_view(), name="add_doctor"),
     path("panel/patients/<int:pk>", PatientView.as_view(), name="patient"),
-    path("panel/patients/new", AddDoctorView.as_view(), name="add_patient"),
+    path("panel/patients/new", AddPatientView.as_view(), name="add_patient"),
     path("panel/prescriptions/<int:pk>", PrescriptionView.as_view(), name="prescription"),
-    path("panel/prescriptions/new", AddDoctorView.as_view(), name="add_prescription"),
+    path("panel/prescriptions/new", AddPrescriptionView.as_view(), name="add_prescription"),
     path("panel/reports/<int:pk>", ReportView.as_view(), name="report"),
-    path("panel/reports/new", ReportView.as_view(), name="add_report"),
+    path("panel/reports/new", AddReportView.as_view(), name="add_report"),
     path("panel/doctors", DoctorsView.as_view(), name="doctors"),
     path("panel/reports", ReportsView.as_view(), name="reports"),
     path("panel/patients", PatientsView.as_view(), name="patients"),

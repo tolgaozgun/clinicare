@@ -1,5 +1,5 @@
 from django import forms
-from .models import User
+from .models import User, Prescription, Report
 import phonenumbers
 from captcha.fields import ReCaptchaField
 from captcha.widgets import ReCaptchaV2Checkbox
@@ -90,3 +90,79 @@ class RegisterForm(forms.ModelForm):
             self.fields[key].widget.attrs['placeholder'] = value
             self.fields[key].widget.attrs['class'] = 'form-control'
 
+
+class PrescriptionForm(forms.ModelForm):
+    captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox())
+    class Meta:
+        model = Prescription
+        fields = ['doctor', 'patient', 'drugs', 'files']
+
+    def clean(self):
+        super().clean()
+
+        value_doctor = self.cleaned_data.get('doctor')
+        value_patient = self.cleaned_data.get('patient')
+        value_drugs = self.cleaned_data.get('drugs')
+        value_files = self.cleaned_data.get('files')
+
+        print("doctor:")
+        print(value_doctor)
+        print("patient:")
+        print(value_patient)
+        print("drugs:")
+        print(value_drugs)
+        print("files:")
+        print(value_files)
+
+        return self.cleaned_data
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        placeholders = {
+            'doctor': 'Select a doctor',
+            'patient': 'Select a patient',
+            'drugs': 'Enter prescribed drugs',
+            'files': 'Select files',
+        }
+        for key, value in placeholders.items():
+            self.fields[key].widget.attrs['placeholder'] = value
+            self.fields[key].widget.attrs['class'] = 'form-control'
+
+
+class ReportForm(forms.ModelForm):
+    captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox())
+
+    class Meta:
+        model = Report
+        fields = ['doctor', 'patient', 'type', 'files']
+
+    def clean(self):
+        super().clean()
+
+        value_doctor = self.cleaned_data.get('doctor')
+        value_patient = self.cleaned_data.get('patient')
+        value_type = self.cleaned_data.get('type')
+        value_files = self.cleaned_data.get('files')
+
+        print("doctor:")
+        print(value_doctor)
+        print("patient:")
+        print(value_patient)
+        print("type:")
+        print(value_type)
+        print("files:")
+        print(value_files)
+
+        return self.cleaned_data
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        placeholders = {
+            'doctor': 'Select a doctor',
+            'patient': 'Select a patient',
+            'type': 'Enter report type',
+            'files': 'Select files',
+        }
+        for key, value in placeholders.items():
+            self.fields[key].widget.attrs['placeholder'] = value
+            self.fields[key].widget.attrs['class'] = 'form-control'
