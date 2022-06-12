@@ -11,25 +11,11 @@
 			</div>
 	<ul class="list-unstyled components">
 		<p>Dummy Heading</p>
-		<li class="active">
-			<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
-			<ul class="collapse list-unstyled" id="homeSubmenu">
-				<li>
-					<a href="#">Home 1</a>
-				</li>
-				<li>
-					<a href="#">Home 2</a>
-				</li>
-				<li>
-					<a href="#">Home 3</a>
-				</li>
-			</ul>
-		</li>
-		<li>
+		<li class="{% if current_page == "home" %} active {% endif %}">
 
 			<a href="{%url 'panel'%}dashboard"><i class="fa-solid fa-gauge"></i>Dashboard</a>
 		</li>
-		<li>
+		<li class="{% if current_page == "doctors" or current_page == "view_doctor" or current_page == "add_doctor" or current_page == "edit_doctor" %} active {% endif %}">
 			<a href="#doctorsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa-solid fa-user-doctor"></i>Doctors</a>
 			<ul class="collapse list-unstyled" id="doctorsSubmenu">
 				<li>
@@ -40,7 +26,7 @@
 				</li>
 			</ul>
 		</li>
-		<li>
+		<li class="{% if current_page == "prescriptions" or current_page == "view_prescription" or current_page == "add_prescription" or current_page == "edit_prescription" %} active {% endif %}">
 			<a href="#prescriptionsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa-solid fa-prescription-bottle"></i>Prescriptions</a>
 			<ul class="collapse list-unstyled" id="prescriptionsSubmenu">
 				<li>

@@ -15,7 +15,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-6">
+            <div class="col">
                 <div class="card" style="padding:1em">
                     {% if is_valid == False %}
                         <h3 class="card-title" style="padding:0.5em">Prescription Not Found</h3>
@@ -34,7 +34,18 @@
                         </div>
                         <div class="row">
                             <p class="col-sm-5">Files:</p>
-                            <p class="col-sm-5">{{ prescription.files }}</p>
+
+                            <div class="col-sm-5">
+{#                                {% for attachment in prescription.files %}#}
+                                    <div class="col-3">
+                                        <div onclick="window.open('{{ prescription.files.url }}')" class="embed-responsive embed-responsive-1by1 text-center">
+                                            {% load static %}
+                                            <img class="embed-responsive-item" src="{% static 'attachment.png' %}">
+                                            <span class="text-white">File {{ prescription.files.id }}</span>
+                                        </div>
+                                    </div>
+{#                                {% endfor %}#}
+                            </div>
                         </div>
                         <div class="row">
                             <p class="col-sm-5">Last Updated:</p>

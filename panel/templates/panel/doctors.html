@@ -26,6 +26,7 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
+                                        <th scope="col">Photo</th>
                                         <th scope="col">Name</th>
                                         <th scope="col">Email</th>
                                         <th scope="col">Phone</th>
@@ -38,6 +39,7 @@
                                 {% for doctor in doctors %}
                                     <tr>
                                         <th scope="row">{{ doctor.id }}</th>
+                                        <td><img class="img-fluid" style="max-height: 100px" src="{{ doctor.photo.url }}"></td>
                                         <td>{{ doctor }}</td>
                                         <td>{{ doctor.email }}</td>
                                         <td>{{ doctor.phone }}</td>
@@ -47,10 +49,10 @@
                                             <a href="{% url 'doctor' pk=doctor.id %}" class="btn btn-info btn-outline btn-circle btn-lg" data-toggle="tooltip" title="View">
                                                 <i class="fa fa-eye ambitious-padding-btn"></i>
                                             </a>
-                                            <a href="#" class="btn btn-info btn-outline btn-circle btn-lg" data-toggle="tooltip" title="Edit">
+                                            <a href="{% url 'edit_doctor' pk=doctor.id %}" class="btn btn-info btn-outline btn-circle btn-lg" data-toggle="tooltip" title="Edit">
                                                 <i class="fa fa-pencil ambitious-padding-btn"></i>
                                             </a>
-                                            <a href="#" class="btn btn-info btn-outline btn-circle btn-lg" data-toggle="tooltip" title="Delete">
+                                            <a href="{% url 'delete_doctor' pk=doctor.id %}" class="btn btn-info btn-outline btn-circle btn-lg" data-toggle="tooltip" title="Delete">
                                                 <i class="fa fa-trash ambitious-padding-btn"></i>
                                             </a>
                                         </td>

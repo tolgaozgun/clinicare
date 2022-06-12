@@ -84,6 +84,16 @@ ul ul a {
     align-items: stretch;
 }
 
+.no-padding {
+    padding: 0;
+}
+
+
+th,
+td {
+    vertical-align: middle !important;
+}
+
 .photo-card{
     padding:0.5em;
     background: #d2dcde;

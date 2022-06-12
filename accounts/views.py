@@ -12,7 +12,8 @@ from django.contrib import messages
 class LogoutView(View):
     def get(self, request):
         logout(request)
-        return redirect('index')
+        print("Logout request recieved")
+        return redirect('base:index')
 
 
 class LoginView(View):
@@ -37,7 +38,7 @@ class LoginView(View):
             if user is not None:
                 login(request, user)
                 print("Login success for user")
-                return redirect('index')
+                return redirect('base:index')
             else:
                 messages.error(request, "Password invalid.")
                 print("Login failed")
@@ -71,6 +72,6 @@ class RegisterView(View):
                                lastUpdated=now,
                                dateCreated=now)
             new_patient.save()
-            return redirect("index")
+            return redirect("base:index")
         else:
             return render(request, "main/register.html", {'form': form})

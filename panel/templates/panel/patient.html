@@ -15,9 +15,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-6">
+            <div class="col">
                 <div class="card" style="padding:1em">
-                    {% if is_valid == False %}
+                    {% if not is_valid %}
                         <h3 class="card-title" style="padding:0.5em">Patient Not Found</h3>
                     {% endif %}
                         <div class="row">

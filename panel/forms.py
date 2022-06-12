@@ -166,3 +166,27 @@ class ReportForm(forms.ModelForm):
         for key, value in placeholders.items():
             self.fields[key].widget.attrs['placeholder'] = value
             self.fields[key].widget.attrs['class'] = 'form-control'
+
+
+class DoctorForm(RegisterForm):
+    class Meta:
+        model = User
+        fields = ['name', 'surname', 'email', 'phone', 'status', 'department', 'role',
+                  'photo', 'isActivated', 'is2FAEnabled']
+
+    def clean(self):
+        super(RegisterForm, self).clean()
+        return self.cleaned_data
+
+    def __init__(self, *args, **kwargs):
+        super(RegisterForm, self).__init__(*args, **kwargs)
+        placeholders = {
+            'status': 'Select status',
+            'department': 'Enter a department',
+            'role': 'Change this user\'s role',
+            'isActivated': 'Change if the account is activated',
+            'is2FAEnabled': 'Change the 2FA status of this account',
+        }
+        for key, value in placeholders.items():
+            self.fields[key].widget.attrs['placeholder'] = value
+            self.fields[key].widget.attrs['class'] = 'form-control'
