@@ -33,13 +33,13 @@ class RegisterForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ['name', 'surname', 'email', 'phone']
+        fields = ['first_name', 'last_name', 'email', 'phone']
 
     def clean(self):
         super(RegisterForm, self).clean()
 
-        value_name = self.cleaned_data.get('name')
-        value_surname = self.cleaned_data.get('surname')
+        value_name = self.cleaned_data.get('first_name')
+        value_surname = self.cleaned_data.get('last_name')
         value_email = self.cleaned_data.get('email')
         value_confirm_email = self.cleaned_data.get('confirmEmail')
         value_phone = self.cleaned_data.get('phone')
@@ -63,10 +63,10 @@ class RegisterForm(forms.ModelForm):
             self._errors['confirmEmail'] = self.error_class(['Email addresses do not match!'])
 
         if len(str(value_name).strip()) < 1:
-            self._errors['name'] = self.error_class(['Please enter your first name'])
+            self._errors['first_name'] = self.error_class(['Please enter your first name'])
 
         if len(str(value_surname).strip()) < 1:
-            self._errors['surname'] = self.error_class(['Please enter your last name'])
+            self._errors['last_name'] = self.error_class(['Please enter your last name'])
 
         phone = phonenumbers.parse(str(value_phone))
 
@@ -78,8 +78,8 @@ class RegisterForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         placeholders = {
-            'name': 'First name',
-            'surname': 'Last name',
+            'first_name': 'First name',
+            'last_name': 'Last name',
             'email': 'example@email.com',
             'confirmEmail': 'example@email.com',
             'phone': '+905123456789',
@@ -171,7 +171,7 @@ class ReportForm(forms.ModelForm):
 class DoctorForm(RegisterForm):
     class Meta:
         model = User
-        fields = ['name', 'surname', 'email', 'phone', 'status', 'department', 'role',
+        fields = ['first_name', 'last_name', 'email', 'phone', 'status', 'department', 'role',
                   'photo', 'isActivated', 'is2FAEnabled']
 
     def clean(self):

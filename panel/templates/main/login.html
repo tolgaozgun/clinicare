@@ -12,9 +12,9 @@
                     <form method="POST" action="">
                         {% csrf_token %}
                         <div class="form-group">
-                            {{ form.username.errors }}
-                            <label for="{{ form.email.id_for_label }}">Username</label>
-                            {{ form.username }}
+                            {{ form.email.errors }}
+                            <label for="{{ form.email.id_for_label }}">Email Address</label>
+                            {{ form.email }}
                         </div>
                         <div class="form-group">
                             {{ form.password.errors }}
@@ -27,6 +27,10 @@
                             {{ form.captcha }}
                         </div>
                         <button class="btn btn-primary btn-block waves-effect waves-light" type="submit">Login</button>
+                        <br>
+                        <a href="{% url 'accounts:register' %}">Have you not registered?</a>
+                        <br>
+                        <a href="{% url 'accounts:register' %}">Problem logging in?</a>
                     </form>
                 </div>
             </div>

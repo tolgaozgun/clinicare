@@ -25,15 +25,16 @@ class LoginView(View):
         form = LoginForm(request.POST)
 
         if form.is_valid():
-            value_email = form.cleaned_data['username']
+            value_email = form.cleaned_data['email']
             value_password = form.cleaned_data['password']
 
             try:
-                user = User.objects.get(username=value_email)
+                User.objects.get(email=value_email)
             except User.DoesNotExist:
                 messages.error(request, "No user found.")
 
-            user = authenticate(request, username=value_email, password=value_password)
+            print("Email " + value_email + " Password: " + value_password)
+            user = authenticate(request, email=value_email, password=value_password)
 
             if user is not None:
                 login(request, user)
@@ -58,13 +59,13 @@ class RegisterView(View):
 
         if form.is_valid():
             password_hashed = make_password(form.cleaned_data['password'])
-            new_patient = User(name=form.cleaned_data['name'],
-                               surname=form.cleaned_data['surname'],
+            new_patient = User(first_name=form.cleaned_data['first_name'],
+                               last_name=form.cleaned_data['last_name'],
                                email=form.cleaned_data['email'],
                                phone=form.cleaned_data['phone'],
                                status=1,
                                role=1,
-                               photo=None,
+                               photo="profile/avatar.png",
                                password=password_hashed,
                                isActivated=False,
                                is2FAEnabled=False,

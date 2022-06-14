@@ -116,9 +116,8 @@ class PatientView(PanelView):
             patient = User.objects.get(id=pk, role=PATIENT_ROLE)
             is_valid = True
         except User.DoesNotExist:
-            patient = User(username="N/A",
-                           name=None,
-                           surname=None,
+            patient = User(first_name=None,
+                           last_name=None,
                            email=None,
                            phone=None,
                            role=0,
@@ -141,9 +140,8 @@ class DoctorView(PanelView):
             doctor = User.objects.get(id=pk, role=DOCTOR_ROLE)
             is_valid = True
         except User.DoesNotExist:
-            doctor = User(username="N/A",
-                          name=None,
-                          surname=None,
+            doctor = User(first_name=None,
+                          last_name=None,
                           email=None,
                           phone=None,
                           role=0,
@@ -170,8 +168,8 @@ class AddPatientView(PanelView):
 
         if form.is_valid():
             password_hashed = make_password(form.cleaned_data['password'])
-            new_patient = User(name=form.cleaned_data['name'],
-                               surname=form.cleaned_data['surname'],
+            new_patient = User(first_name=form.cleaned_data['first_name'],
+                               last_name=form.cleaned_data['last_name'],
                                email=form.cleaned_data['email'],
                                phone=form.cleaned_data['phone'],
                                status=1,
@@ -202,8 +200,8 @@ class AddDoctorView(PanelView):
 
         if form.is_valid():
             password_hashed = make_password(form.cleaned_data['password'])
-            new_patient = User(name=form.cleaned_data['name'],
-                               surname=form.cleaned_data['surname'],
+            new_patient = User(first_name=form.cleaned_data['first_name'],
+                               last_name=form.cleaned_data['last_name'],
                                email=form.cleaned_data['email'],
                                phone=form.cleaned_data['phone'],
                                status=1,
@@ -289,8 +287,8 @@ class EditPatientView(PanelView):
 
         if form.is_valid() and is_valid:
             # password_hashed = make_password(form.cleaned_data['password'])
-            new_patient = User(name=form.cleaned_data['name'],
-                               surname=form.cleaned_data['surname'],
+            new_patient = User(first_name=form.cleaned_data['first_name'],
+                               last_name=form.cleaned_data['last_name'],
                                email=form.cleaned_data['email'],
                                phone=form.cleaned_data['phone'],
                                status=form.cleaned_data['status'],
@@ -333,8 +331,8 @@ class EditDoctorView(PanelView):
 
         if form.is_valid() and is_valid:
             password_hashed = make_password(form.cleaned_data['password'])
-            new_doctor = User(name=form.cleaned_data['name'],
-                              surname=form.cleaned_data['surname'],
+            new_doctor = User(first_name=form.cleaned_data['first_name'],
+                              last_name=form.cleaned_data['last_name'],
                               email=form.cleaned_data['email'],
                               phone=form.cleaned_data['phone'],
                               status=form.cleaned_data['status'],
@@ -396,17 +394,19 @@ class EditPrescriptionView(PanelView):
             return render(request, "panel/add_prescription.html", {'form': form})
 
 
-class ProductsView(View):
+class ProductsView(PanelView):
     def get(self, request):
-        return render(request, 'panel/products.html')
+        products = Product.objects.all()
+        context = {'products': products, 'current_page': 'products'}
+        return render(request, 'panel/products.html', context)
 
 
-class ProductView(View):
+class ProductView(PanelView):
     def get(self, request, pk):
         try:
             product = Product.objects.get(id=pk)
         except Product.DoesNotExist:
             product = None
 
-        context = {'product': product}
+        context = {'product': product, 'current_page': 'view_product'}
         return render(request, 'panel/product.html', context)

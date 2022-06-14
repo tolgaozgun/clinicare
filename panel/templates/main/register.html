@@ -9,8 +9,8 @@
         <div class="container">
             <div class="row justify-content-center">
                     <div class="card col-md-8">
-                        <div class="row">
-                            <span>Registration Form</span>
+                        <div class="row justify-content-center mt-3 mb-3">
+                            <h2>Registration Form</h2>
                         </div>
                         <div class="row form-button-row">
                             <div class="form-selector active col-md-6" onclick="switchForm(0)">Patient</div>
@@ -20,14 +20,14 @@
                             {% csrf_token %}
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                    {{ form.name.errors }}
-                                    <label for="{{ form.name.id_for_label }}">First Name</label>
-                                    {{ form.name }}
+                                    {{ form.first_name.errors }}
+                                    <label for="{{ form.first_name.id_for_label }}">First Name</label>
+                                    {{ form.first_name }}
                                 </div>
                                 <div class="form-group col-md-6">
-                                    {{ form.surname.errors }}
-                                    <label for="{{ form.surname.id_for_label }}">Last Name</label>
-                                    {{ form.surname }}
+                                    {{ form.last_name.errors }}
+                                    <label for="{{ form.last_name.id_for_label }}">Last Name</label>
+                                    {{ form.last_name }}
                                 </div>
                             </div>
                             <div class="form-group">

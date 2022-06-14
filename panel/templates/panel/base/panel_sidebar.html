@@ -2,7 +2,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-9 sidebar-header">
-				 		<h3>Sidebar Header</h3>
+				 		<h3>Clinicare</h3>
 					</div>
 					<div class="col sidebar-header sidebar-toggle">
 						<i class="fa-solid fa-chevron-left"></i>
@@ -10,7 +10,8 @@
 				</div>
 			</div>
 	<ul class="list-unstyled components">
-		<p>Dummy Heading</p>
+		<p>Welcome back, {{ request.user.first_name }}!</p>
+{#        <img class="img-fluid ml-1 mb" src="{{ request.user.photo.url }}" style="max-width: 40px; max-height: 40px;">#}
 		<li class="{% if current_page == "home" %} active {% endif %}">
 
 			<a href="{%url 'panel'%}dashboard"><i class="fa-solid fa-gauge"></i>Dashboard</a>
@@ -37,7 +38,7 @@
 				</li>
 			</ul>
 		</li>
-		<li>
+		<li class="{% if current_page == "reports" or current_page == "view_report" or current_page == "add_report" or current_page == "edit_report" %} active {% endif %}">
 			<a href="#reportsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa-solid fa-flask"></i>Reports</a>
 			<ul class="collapse list-unstyled" id="reportsSubmenu">
 				<li>
@@ -48,7 +49,8 @@
 				</li>
 			</ul>
 		</li>
-		<li>
+		<li class="{% if current_page == "patients" or current_page == "view_patient" or current_page == "add_patient" or current_page == "edit_patient" %} active {% endif %}">
+
 			<a href="#patientsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa-solid fa-bed"></i>Patients</a>
 			<ul class="collapse list-unstyled" id="patientsSubmenu">
 				<li>
@@ -59,8 +61,30 @@
 				</li>
 			</ul>
 		</li>
-		<li>
-			<a href="#">Contact</a>
+		<li class="{% if current_page == "products" or current_page == "view_product" or current_page == "add_product" or current_page == "edit_product" %} active {% endif %}">
+			<a href="#productsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa-solid fa-shop"></i>Products</a>
+			<ul class="collapse list-unstyled" id="productsSubmenu">
+				<li>
+					<a href="{% url 'products' %}">Products List</a>
+				</li>
+				<li>
+					<a href="{% url 'add_product' %}">Add a New Product</a>
+				</li>
+				<li>
+					<a href="#">My Purchases</a>
+				</li>
+			</ul>
+		</li>
+		<li class="{% if current_page == "appointments" or current_page == "view_appointment" or current_page == "add_appointment" or current_page == "edit_appointment" %} active {% endif %}">
+			<a href="#appointmentsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa-solid fa-calendar-check"></i>Appointments</a>
+			<ul class="collapse list-unstyled" id="appointmentsSubmenu">
+				<li>
+					<a href="{% url 'appointments' %}">Appointment List</a>
+				</li>
+				<li>
+					<a href="{% url 'add_appointment' %}">Book a New Appointment</a>
+				</li>
+			</ul>
 		</li>
 	</ul>
 </nav>

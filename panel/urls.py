@@ -33,7 +33,14 @@ urlpatterns = [
     path("reports/<int:pk>/delete", EditReportView.as_view(), name="delete_report"),
 
     path("products", ProductsView.as_view(), name="products"),
-    path("product/<int:pk>", ProductView.as_view(), name="product"),
-    path("product/<int:pk>/edit", ProductView.as_view(), name="product_edit"),
-    path("product/<int:pk>/delete", ProductView.as_view(), name="product_delete"),
+    path("products/new", ProductsView.as_view(), name="add_product"),
+    path("products/<int:pk>", ProductView.as_view(), name="product"),
+    path("products/<int:pk>/edit", ProductView.as_view(), name="edit_product"),
+    path("products/<int:pk>/delete", ProductView.as_view(), name="delete_product"),
+
+    path("appointments", ProductsView.as_view(), name="appointments"),
+    path("appointments/new", ProductsView.as_view(), name="add_appointment"),
+    path("appointments/<int:pk>", ProductView.as_view(), name="appointment"),
+    path("appointments/<int:pk>/edit", ProductView.as_view(), name="edit_appointment"),
+    path("appointments/<int:pk>/delete", ProductView.as_view(), name="delete_appointment"),
 ]

@@ -1,15 +1,16 @@
+from django.contrib.auth.models import AbstractUser
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.utils.timezone import now
+from djmoney.models.fields import MoneyField
+# from panel.models import User
 from phonenumber_field.modelfields import PhoneNumberField
-from django.contrib.auth.models import AbstractUser
-
-# Create your models here.
 
 
 class User(AbstractUser):
-    name = models.CharField(max_length=100)
-    surname = models.CharField(max_length=100)
+    username = None
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
     email = models.EmailField(null=False, blank=False, unique=True)
     phone = PhoneNumberField(null=False, blank=False, unique=True)
     role = models.SmallIntegerField(default=1)
@@ -20,18 +21,20 @@ class User(AbstractUser):
     is2FAEnabled = models.BooleanField(default=False)
     lastLogin = models.DateTimeField(default=None, null=True)
     photo = models.ImageField(upload_to="profile", null=True, default="profile/avatar.png")
+    cart = models.ForeignKey('Cart', on_delete=models.CASCADE, default=None, null=True, related_name="user_cart")
     # sessions =
     # ipAddresses =
     lastUpdated = models.DateTimeField(auto_now=True, editable=False)
     dateCreated = models.DateTimeField(auto_now_add=True, editable=False)
-
-    REQUIRED_FIELDS = ['name', 'surname', 'email']
+    REQUIRED_FIELDS = ['first_name', 'last_name']
+    USERNAME_FIELD = 'email'
+    EMAIL_FIELD = 'email'
 
     def __str__(self):
         if self is None:
             return "None"
         else:
-            return self.name + " " + self.surname
+            return self.first_name + " " + self.last_name
 
 
 class Prescription(models.Model):
@@ -64,7 +67,7 @@ class Product(models.Model):
     name = models.CharField(max_length=255)
     slug = models.SlugField(blank=True, unique=True)
     description = models.TextField()
-    price = models.DecimalField(max_digits=10, decimal_places=2)
+    price = MoneyField(max_digits=14, decimal_places=2, default_currency='TRY')
     image = models.ImageField(upload_to="product", default="product/default.png")
 
 
@@ -75,14 +78,21 @@ class OrderProduct(Product):
 
 class Cart(models.Model):
     orderNo = models.CharField(max_length=40)
-    customer = models.ForeignKey(User, on_delete=models.CASCADE, default=None, related_name="order_customer")
+    customer = models.ForeignKey(User, on_delete=models.CASCADE, default=None, related_name="cart_customer")
     products = models.ManyToManyField(Product)
     lastUpdated = models.DateTimeField(auto_now=True)
 
 
-class Order(Cart):
+class Order(models.Model):
+    orderNo = models.CharField(max_length=40)
+    customer = models.ForeignKey(User, on_delete=models.CASCADE, default=None, related_name="order_customer")
+    products = models.ManyToManyField(Product)
+    lastUpdated = models.DateTimeField(auto_now=True)
     billing = models.ForeignKey('Billing', on_delete=models.CASCADE, default=None, related_name="order_billing")
     dateCreated = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return "Cart: " + str(id)
 
 
 class Billing(models.Model):
@@ -90,6 +100,9 @@ class Billing(models.Model):
     paymentMethod = models.SmallIntegerField(default=1) # Enum
     isPaid = models.BooleanField(default=False)
     dateCreated = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return "Billing: " + str(id)
 
 
 

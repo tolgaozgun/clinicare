@@ -1,20 +1,20 @@
 {% extends 'panel/base/panel_base_index.html' %}
 
 {% block title %}
-<title>Prescriptions - Clinicare</title>
+<title>Appointments - Clinicare</title>
 {% endblock %}
 
 {% block content %}
     <div class="content-wrapper">
         <div class="container-fluid">
             <section class="container-header">
-                <h2>Prescriptions</h2>
+                <h2>Appointments</h2>
             </section>
             <div class="row">
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Prescription List</h3>
+                            <h3 class="card-title">Appointment List</h3>
                             <div class="card-tools">
                                 <button class="btn btn-primary" data-toggle="collapse" href="#filter">
                                     <i class="fa fa-filter"></i> Filter
@@ -33,20 +33,20 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                {% for prescription in prescriptions %}
+                                {% for appointment in appointments %}
                                     <tr>
-                                        <th scope="row">{{ prescription.id }}</th>
-                                        <td>{{ prescription.doctor.first_name }} {{ prescription.doctor.last_name }}</td>
-                                        <td>{{ prescription.patient.first_name }} {{ prescription.patient.last_name }}</td>
-                                        <td>{{ prescription.dateCreated }}</td>
+                                        <th scope="row">{{ appointment.id }}</th>
+                                        <td>{{ appointment.doctor.first_name }} {{ appointment.doctor.last_name }}</td>
+                                        <td>{{ appointment.patient.first_name }} {{ appointment.patient.last_name }}</td>
+                                        <td>{{ appointment.dateCreated }}</td>
                                         <td>
-                                            <a href="{% url 'prescription' pk=prescription.id%}" class="btn btn-info btn-outline btn-circle btn-lg" data-toggle="tooltip" title="View">
+                                            <a href="{% url 'appointment' pk=prescription.id%}" class="btn btn-info btn-outline btn-circle btn-lg" data-toggle="tooltip" title="View">
                                                 <i class="fa fa-eye ambitious-padding-btn"></i>
                                             </a>
-                                            <a href="{% url 'edit_prescription' pk=prescription.id %}" class="btn btn-info btn-outline btn-circle btn-lg" data-toggle="tooltip" title="Edit">
+                                            <a href="{% url 'edit_appointment' pk=prescription.id %}" class="btn btn-info btn-outline btn-circle btn-lg" data-toggle="tooltip" title="Edit">
                                                 <i class="fa fa-pencil ambitious-padding-btn"></i>
                                             </a>
-                                            <a href="{% url 'delete_prescription' pk=prescription.id %}" class="btn btn-info btn-outline btn-circle btn-lg" data-toggle="tooltip" title="Delete">
+                                            <a href="{% url 'delete_appointment' pk=prescription.id %}" class="btn btn-info btn-outline btn-circle btn-lg" data-toggle="tooltip" title="Delete">
                                                 <i class="fa fa-trash ambitious-padding-btn"></i>
                                             </a>
                                         </td>

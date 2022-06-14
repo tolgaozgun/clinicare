@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'base',
     'accounts',
     'captcha',
+    'djmoney',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -119,6 +120,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = ['accounts.backends.AccountsBackend']
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/

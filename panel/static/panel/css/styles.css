@@ -88,6 +88,56 @@ ul ul a {
     padding: 0;
 }
 
+.content {
+    padding:1em
+}
+
+.nav-right{
+    margin:auto;
+    padding-right: 1em;
+}
+
+.nav-item{
+    padding: 0.5em;
+}
+
+
+.navbar .profile-dropdown.show{
+    background: #d2dcde;
+    transition: all 0.3s;
+}
+
+.navbar > ul li.active > a, a[aria-expanded="true"] {
+    color: #fff;
+    background: inherit;
+}
+
+.no-transition {
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -o-transition: none !important;
+  transition: none !important;
+}
+
+.product-card{
+    max-width: 300px;
+    max-height: 500px;
+    padding: 1em;
+}
+
+.product-title {
+    font-size: 1.2rem;
+    font-weight:bold;
+}
+
+.product-price{
+    font-size: 1.5rem;
+}
+
+.product-img{
+    max-width: 300px;
+    max-height: 300px;
+}
 
 th,
 td {

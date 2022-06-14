@@ -1,14 +1,11 @@
 from django.contrib import admin
+from .models import Report, Prescription, Appointment, Product, OrderProduct, Order, Billing, Cart
 
-# Register your models here.
-
-
-from .models import User, Report, Prescription, Appointment, Product, OrderProduct, Order
-
-admin.site.register(User)
 admin.site.register(Report)
 admin.site.register(Prescription)
 admin.site.register(Appointment)
 admin.site.register(Product)
 admin.site.register(OrderProduct)
 admin.site.register(Order)
+admin.site.register(Billing)
+admin.site.register(Cart)
