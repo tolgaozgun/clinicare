@@ -7,11 +7,23 @@
 
 {% block content %}
     <div class="container-xxl">
+        <nav class="mt-3" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'base:index' %}">Home</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'panel:dashboard' %}">Control Panel</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Products</li>
+            </ol>
+        </nav>
         <div class="content">
             <div class="row justify-content-center">
                 <h2>Products</h2>
             </div>
             <div class="row">
+                {% if not products %}
+                    <center>
+                        <p>No products found</p>
+                    </center>
+                {% endif %}
                 {% for product in products %}
                     <center>
                 <div class="col-auto">

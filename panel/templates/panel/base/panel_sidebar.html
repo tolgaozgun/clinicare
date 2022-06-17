@@ -86,5 +86,16 @@
 				</li>
 			</ul>
 		</li>
+		<li>
+			<a href="#postsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa-solid fa-comment"></i>Blog Posts</a>
+			<ul class="collapse list-unstyled" id="postsSubmenu">
+				<li>
+					<a href="{% url 'blog:posts' %}">Post List</a>
+				</li>
+				<li>
+					<a href="{% url 'blog:add_post' %}">New Post</a>
+				</li>
+			</ul>
+		</li>
 	</ul>
 </nav>

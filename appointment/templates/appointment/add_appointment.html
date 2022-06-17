@@ -4,6 +4,13 @@
 {% block content %}
     <div class="authentication-wrapper">
         <div class="container">
+        <nav class="mt-3" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'base:index' %}">Home</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'panel:appointment:appointments' %}">Appointments</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Book an Appointment</li>
+            </ol>
+        </nav>
             <div class="row justify-content-center">
                     <div class="card col-md-8">
                         <form class="active" method="POST" action="">
