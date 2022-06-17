@@ -1,25 +1,24 @@
-from django.shortcuts import render, HttpResponseRedirect, redirect
+from django.shortcuts import render, redirect
 from django.utils.timezone import now
 from django.views import View
-from panel.models import User
-from .forms import RegisterForm, LoginForm
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.hashers import make_password, check_password
+from accounts.models import User
+from .forms import RegisterForm, LoginForm, ActivateForm
+from django.contrib.auth.hashers import make_password
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from django_email_verification import send_email
 
 
 class LogoutView(View):
     def get(self, request):
         logout(request)
-        print("Logout request recieved")
         return redirect('base:index')
 
 
 class LoginView(View):
     def get(self, request):
         form = LoginForm()
-        return render(request, 'main/login.html', {'form': form})
+        return render(request, 'accounts/login.html', {'form': form})
 
     def post(self, request):
         form = LoginForm(request.POST)
@@ -33,46 +32,76 @@ class LoginView(View):
             except User.DoesNotExist:
                 messages.error(request, "No user found.")
 
-            print("Email " + value_email + " Password: " + value_password)
             user = authenticate(request, email=value_email, password=value_password)
 
             if user is not None:
-                login(request, user)
-                print("Login success for user")
-                return redirect('base:index')
+                if user.is_active:
+                    login(request, user)
+                    return redirect('base:index')
+                else:
+                    messages.error(request, "Your account is not activated!")
+                    return render(request, "accounts/login.html", {'form': form})
             else:
                 messages.error(request, "Password invalid.")
-                print("Login failed")
-                return render(request, "main/login.html", {'form': form})
-        else:
-            return render(request, "main/login.html", {'form': form})
+                return render(request, "accounts/login.html", {'form': form})
+
+        return render(request, "accounts/login.html", {'form': form})
 
 
 class RegisterView(View):
     def get(self, request):
         form = RegisterForm()
-        return render(request, 'main/register.html', {'form': form})
+        return render(request, 'accounts/register.html', {'form': form})
 
     def post(self, request):
-        form = RegisterForm(request.POST)
-        # doctor_form = RegisterDoctorForm(request.POST)
+        form = RegisterForm(request.POST, request.FILES)
 
         if form.is_valid():
             password_hashed = make_password(form.cleaned_data['password'])
-            new_patient = User(first_name=form.cleaned_data['first_name'],
-                               last_name=form.cleaned_data['last_name'],
-                               email=form.cleaned_data['email'],
-                               phone=form.cleaned_data['phone'],
-                               status=1,
-                               role=1,
-                               photo="profile/avatar.png",
-                               password=password_hashed,
-                               isActivated=False,
-                               is2FAEnabled=False,
-                               lastLogin=None,
-                               lastUpdated=now,
-                               dateCreated=now)
-            new_patient.save()
-            return redirect("base:index")
+            form.cleaned_data.pop('confirmEmail')
+            form.cleaned_data.pop('confirmPassword')
+            form.cleaned_data.pop('captcha')
+            form.cleaned_data['password'] = password_hashed
+
+            new_user = User(**form.cleaned_data,
+                            status=1,
+                            is_active=False,
+                            # photo=request.FILES['photo'],
+                            is2FAEnabled=False,
+                            lastLogin=None,
+                            lastUpdated=now,
+                            dateCreated=now)
+            send_email(new_user)
+            new_user.save()
+            messages.info("Register successful!")
+            return render(request, "accounts/register.html", {'form': form})
         else:
-            return render(request, "main/register.html", {'form': form})
+            return render(request, "accounts/register.html", {'form': form})
+
+
+class ActivateView(View):
+    def get(self, request):
+        form = ActivateForm()
+        return render(request, 'accounts/activate.html', {'form': form})
+
+    def post(self, request):
+        form = ActivateForm(request.POST)
+
+        if form.is_valid():
+            value_email = form.cleaned_data['email']
+
+            try:
+                user = User.objects.get(email=value_email)
+            except User.DoesNotExist:
+                user = None
+                messages.error(request, "No user found with the given email address.")
+
+            if user is not None:
+                if user.is_active:
+                    messages.info(request, "Your account is already activated")
+                else:
+                    send_email(user)
+                    messages.info(request, "Verification mail is sent!")
+
+        return render(request, "accounts/activate.html", {'form': form})
+

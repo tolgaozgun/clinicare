@@ -1,0 +1,79 @@
+{% extends 'panel/base/panel_base_index.html' %}
+
+{% block title %}
+    <title>Products - Clinicare</title>
+{% endblock %}
+
+
+{% block content %}
+    <div class="container-xxl">
+        <div class="content">
+            <div class="row justify-content-center">
+                <h2>Products</h2>
+            </div>
+            <div class="row">
+                {% for product in products %}
+                    <center>
+                <div class="col-auto">
+                    <div class="card product-card">
+                        <img class="card-img img-fluid product-img" src="{{ product.coverImage.file.url }}" href="{% url 'panel:product:product' pk=product.id %}">
+                        <span class="card-title product-title" href="{% url 'panel:product:product' pk=product.id %}">
+                            {{ product.name }}
+                        </span>
+                        <span class="product-price">
+                            {{ product.price }}
+                        </span>
+                        <button type="button" class="btn btn-default btn-sm">
+                             <a href="#" class="btn btn-info btn-lg">
+                                 <i class="fa fa-shopping-cart"></i>
+                                 <b> Add to Cart </b>
+                             </a>
+                        </button>
+                        <br>
+                        <div class="row">
+                            <div class="col-sm-3 ml-4">
+                                <a href="{% url 'panel:product:product' pk=product.id%}" class="btn btn-info btn-outline btn-circle btn-lg" style="max-width: 70px" data-toggle="tooltip" title="View">
+                                    <i class="fa fa-eye ambitious-padding-btn"></i>
+                                </a>
+                            </div>
+                            <div class="col-sm-3">
+                                <a href="{% url 'panel:product:edit_product' pk=product.id %}" class="btn btn-info btn-outline btn-circle btn-lg" style="max-width: 70px" data-toggle="tooltip" title="Edit">
+                                    <i class="fa fa-pencil ambitious-padding-btn"></i>
+                                </a>
+                            </div>
+                            <div class="col-sm-3">
+                                <a href="{% url 'panel:product:delete_product' pk=product.id %}" class="btn btn-info btn-outline btn-circle btn-lg" style="max-width: 70px" data-toggle="tooltip" title="Delete">
+                                    <i class="fa fa-trash ambitious-padding-btn"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    </center>
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% if users.has_other_pages %}
+         <ul class="pagination">
+            {% if users.has_previous %}
+              <li><a href="?page={{ users.previous_page_number }}">&laquo;</a></li>
+            {% else %}
+              <li class="disabled"><span>&laquo;</span></li>
+            {% endif %}
+            {% for i in users.paginator.page_range %}
+              {% if users.number == i %}
+                <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+              {% else %}
+                <li><a href="?page={{ i }}">{{ i }}</a></li>
+              {% endif %}
+            {% endfor %}
+            {% if users.has_next %}
+              <li><a href="?page={{ users.next_page_number }}">&raquo;</a></li>
+            {% else %}
+              <li class="disabled"><span>&raquo;</span></li>
+            {% endif %}
+        </ul>
+        {% endif %}
+    </div>
+{% endblock %}

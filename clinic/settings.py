@@ -33,9 +33,20 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'panel',
     'base',
+    'blog',
+    'prescription',
+    'product',
+    'report',
+    'doctor',
+    'patient',
+    'appointment',
     'accounts',
     'captcha',
+    'cart',
     'djmoney',
+    'django_email_verification',
+    'bootstrap4',
+    'bootstrap_datepicker_plus',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -44,7 +55,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
-AUTH_USER_MODEL = 'panel.User'
+AUTH_USER_MODEL = 'accounts.User'
+MODELS_PER_PAGE = 5
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -78,7 +90,29 @@ WSGI_APPLICATION = 'clinic.wsgi.application'
 
 RECAPTCHA_PUBLIC_KEY = config("RECAPTCHA_PUBLIC_KEY")
 RECAPTCHA_PRIVATE_KEY = config("RECAPTCHA_PRIVATE_KEY")
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = config('EMAIL_ID')
+EMAIL_HOST_PASSWORD = config('EMAIL_PW')
 
+SERVER_EMAIL = config('EMAIL_ID')
+
+
+def verified_callback(user):
+    user.is_active = True
+
+
+EMAIL_VERIFIED_CALLBACK = verified_callback
+EMAIL_FROM_ADDRESS = 'noreply<no_reply@clinicare.com>'
+EMAIL_MAIL_SUBJECT = 'Confirm your email'
+EMAIL_MAIL_HTML = 'mail_body.html'
+EMAIL_MAIL_PLAIN = 'mail_body.txt'
+EMAIL_TOKEN_LIFE = 60 * 60
+EMAIL_PAGE_TEMPLATE = 'confirm_template.html'
+EMAIL_PAGE_DOMAIN = 'http://127.0.0.1:8000/'
+EMAIL_MULTI_USER = True  # optional (defaults to False)
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases

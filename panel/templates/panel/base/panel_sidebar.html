@@ -14,16 +14,16 @@
 {#        <img class="img-fluid ml-1 mb" src="{{ request.user.photo.url }}" style="max-width: 40px; max-height: 40px;">#}
 		<li class="{% if current_page == "home" %} active {% endif %}">
 
-			<a href="{%url 'panel'%}dashboard"><i class="fa-solid fa-gauge"></i>Dashboard</a>
+			<a href="{%url 'panel:dashboard'%}"><i class="fa-solid fa-gauge"></i>Dashboard</a>
 		</li>
 		<li class="{% if current_page == "doctors" or current_page == "view_doctor" or current_page == "add_doctor" or current_page == "edit_doctor" %} active {% endif %}">
 			<a href="#doctorsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa-solid fa-user-doctor"></i>Doctors</a>
 			<ul class="collapse list-unstyled" id="doctorsSubmenu">
 				<li>
-					<a href="{% url 'doctors' %}">Doctors List</a>
+					<a href="{% url 'panel:doctor:doctors' %}">Doctors List</a>
 				</li>
 				<li>
-					<a href="{% url 'add_doctor' %}">Add a New Doctor</a>
+					<a href="{% url 'panel:doctor:add_doctor' %}">Add a New Doctor</a>
 				</li>
 			</ul>
 		</li>
@@ -31,10 +31,10 @@
 			<a href="#prescriptionsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa-solid fa-prescription-bottle"></i>Prescriptions</a>
 			<ul class="collapse list-unstyled" id="prescriptionsSubmenu">
 				<li>
-					<a href="{% url 'prescriptions' %}">Prescriptions List</a>
+					<a href="{% url 'panel:prescription:prescriptions' %}">Prescriptions List</a>
 				</li>
 				<li>
-					<a href="{% url 'add_prescription' %}">Add a New Prescription</a>
+					<a href="{% url 'panel:prescription:add_prescription' %}">Add a New Prescription</a>
 				</li>
 			</ul>
 		</li>
@@ -42,10 +42,10 @@
 			<a href="#reportsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa-solid fa-flask"></i>Reports</a>
 			<ul class="collapse list-unstyled" id="reportsSubmenu">
 				<li>
-					<a href="{% url 'reports' %}">Reports List</a>
+					<a href="{% url 'panel:report:reports' %}">Reports List</a>
 				</li>
 				<li>
-					<a href="{% url 'add_report' %}">Add a New Report</a>
+					<a href="{% url 'panel:report:add_report' %}">Add a New Report</a>
 				</li>
 			</ul>
 		</li>
@@ -54,10 +54,10 @@
 			<a href="#patientsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa-solid fa-bed"></i>Patients</a>
 			<ul class="collapse list-unstyled" id="patientsSubmenu">
 				<li>
-					<a href="{% url 'patients' %}">Patients List</a>
+					<a href="{% url 'panel:patient:patients' %}">Patients List</a>
 				</li>
 				<li>
-					<a href="{% url 'add_patient' %}">Add a New Patient</a>
+					<a href="{% url 'panel:patient:add_patient' %}">Add a New Patient</a>
 				</li>
 			</ul>
 		</li>
@@ -65,10 +65,10 @@
 			<a href="#productsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa-solid fa-shop"></i>Products</a>
 			<ul class="collapse list-unstyled" id="productsSubmenu">
 				<li>
-					<a href="{% url 'products' %}">Products List</a>
+					<a href="{% url 'panel:product:products' %}">Products List</a>
 				</li>
 				<li>
-					<a href="{% url 'add_product' %}">Add a New Product</a>
+					<a href="{% url 'panel:product:add_product' %}">Add a New Product</a>
 				</li>
 				<li>
 					<a href="#">My Purchases</a>
@@ -79,10 +79,10 @@
 			<a href="#appointmentsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa-solid fa-calendar-check"></i>Appointments</a>
 			<ul class="collapse list-unstyled" id="appointmentsSubmenu">
 				<li>
-					<a href="{% url 'appointments' %}">Appointment List</a>
+					<a href="{% url 'panel:appointment:appointments' %}">Appointment List</a>
 				</li>
 				<li>
-					<a href="{% url 'add_appointment' %}">Book a New Appointment</a>
+					<a href="{% url 'panel:appointment:add_appointment' %}">Book a New Appointment</a>
 				</li>
 			</ul>
 		</li>

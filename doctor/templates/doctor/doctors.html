@@ -1,0 +1,101 @@
+{% extends 'panel/base/panel_base_index.html' %}
+
+{% block title %}
+<title>Doctors - Clinicare</title>
+{% endblock %}
+
+{% block content %}
+    <div class="content-wrapper">
+        <div class="container-fluid">
+            <section class="container-header">
+                <h2>Doctors</h2>
+            </section>
+            <nav class="mt-3" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'base:index' %}">Home</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'panel:dashboard' %}">Control Panel</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Doctors</li>
+                </ol>
+            </nav>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Doctor List</h3>
+                            <div class="card-tools">
+                                <button class="btn btn-primary" data-toggle="collapse" href="#filter">
+                                    <i class="fa fa-filter"></i> Filter
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Photo</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Phone</th>
+                                        <th scope="col">Department</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {% for doctor in doctors %}
+                                    <tr>
+                                        <th scope="row">{{ doctor.id }}</th>
+                                        <td><img class="img-fluid" style="max-height: 100px" src="{{ doctor.photo.url }}"></td>
+                                        <td>{{ doctor }}</td>
+                                        <td>{{ doctor.email }}</td>
+                                        <td>{{ doctor.phone }}</td>
+                                        <td>{{ doctor.department }}</td>
+                                        <td>{{ doctor.status }}</td>
+                                        <td>
+                                            <a href="{% url 'panel:doctor:doctor' pk=doctor.id %}" class="btn btn-info btn-outline btn-circle btn-lg" data-toggle="tooltip" title="View">
+                                                <i class="fa fa-eye ambitious-padding-btn"></i>
+                                            </a>
+                                            <a href="{% url 'panel:doctor:edit_doctor' pk=doctor.id %}" class="btn btn-info btn-outline btn-circle btn-lg" data-toggle="tooltip" title="Edit">
+                                                <i class="fa fa-pencil ambitious-padding-btn"></i>
+                                            </a>
+                                            <a href="{% url 'panel:doctor:delete_doctor' pk=doctor.id %}" class="btn btn-info btn-outline btn-circle btn-lg" data-toggle="tooltip" title="Delete">
+                                                <i class="fa fa-trash ambitious-padding-btn"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {% if doctors.has_other_pages %}
+              <ul class="pagination">
+                {% if doctors.has_previous %}
+                  <li><a href="?page={{ doctors.previous_page_number }}">&laquo;</a></li>
+                {% else %}
+                  <li class="disabled"><span>&laquo;</span></li>
+                {% endif %}
+                {% for i in doctors.paginator.page_range %}
+                  {% if doctors.number == i %}
+                    <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                  {% else %}
+                    <li><a href="?page={{ i }}">{{ i }}</a></li>
+                  {% endif %}
+                {% endfor %}
+                {% if doctors.has_next %}
+                  <li><a href="?page={{ doctors.next_page_number }}">&raquo;</a></li>
+                {% else %}
+                  <li class="disabled"><span>&raquo;</span></li>
+                {% endif %}
+              </ul>
+            {% endif %}
+
+
+
+        </div>
+    </div>
+{% endblock %}

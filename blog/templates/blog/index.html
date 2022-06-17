@@ -1,0 +1,43 @@
+{% extends 'blog/base_index.html' %}
+
+{% block title %}
+<title>Blog - Clinicare</title>
+{% endblock %}
+
+{% block extracss %}
+    {% load static %}
+	<link href="{% static 'css/blog.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <center>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            {% for post in posts %}
+                <a href="{% url 'blog:post' pk=post.id %}">
+                    <div class="container-fluid blog-card">
+                        <div class="row">
+                            <div class="col">
+                                <img src="{{ post.image.url }}">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <span class="blog-card-title">{{ post.title }}</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <span class="blog-card-desc">{{ post.description }}</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+    </div>
+    </center>
+{% endblock %}

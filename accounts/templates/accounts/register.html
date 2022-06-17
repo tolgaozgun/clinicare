@@ -1,0 +1,93 @@
+{% extends "main/main_base_index.html" %}
+
+{% block title %}
+    <title>Register - Clinicare</title>
+{% endblock %}
+
+{% block content %}
+    <div class="authentication-wrapper">
+        <div class="container">
+            <div class="row justify-content-center">
+                    <div class="card col-md-8">
+                        <div class="row justify-content-center mt-3 mb-3">
+                            <h2>Registration Form</h2>
+                        </div>
+                        <div class="row form-button-row">
+                            <div class="form-selector active col-md-6" onclick="switchForm(0)">Patient</div>
+                            <div class="form-selector col-md-6" onclick="switchForm(1)">Doctor</div>
+                        </div>
+                        <form class="active" method="POST" action="" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    {{ form.first_name.errors }}
+                                    <label for="{{ form.first_name.id_for_label }}">First Name</label>
+                                    {{ form.first_name }}
+                                </div>
+                                <div class="form-group col-md-6">
+                                    {{ form.last_name.errors }}
+                                    <label for="{{ form.last_name.id_for_label }}">Last Name</label>
+                                    {{ form.last_name }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form.email.errors }}
+                                <label for="{{ form.email.id_for_label }}">Email Address</label>
+                                {{ form.email }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.confirmEmail.errors }}
+                                <label for="{{ form.confirmEmail.id_for_label }}">Confirm Email Address</label>
+                                {{ form.confirmEmail }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.phone.errors }}
+                                <label for="{{ form.phone.id_for_label }}">Phone Number</label>
+                                {{ form.phone }}
+                            </div>
+                            <div class="form-row form-group">
+                                {{ form.password.errors }}
+                                <label for="{{ form.password.id_for_label }}">Password</label>
+                                {{ form.password }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.confirmPassword.errors }}
+                                <label for="{{ form.confirmPassword.id_for_label }}">Confirm Password</label>
+                                {{ form.confirmPassword }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.photo.errors }}
+                                <label for="{{ form.photo.id_for_label }}">Photo</label>
+                                {{ form.photo }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.captcha.errors }}
+                                <label for="{{ form.captcha.id_for_label }}">Captcha</label>
+                                {{ form.captcha }}
+                            </div>
+                            {{ form.role.errors }}
+                            {{ form.role }}
+                            <button class="btn btn-primary btn-block waves-effect waves-light" type="submit">Register</button>
+                            <br>
+                            <a href="{% url 'accounts:register' %}">Have you not registered?</a>
+                            <br>
+                            <a href="{% url 'accounts:activate' %}">Activate your account</a>
+                        </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extracss %}
+    {% load static %}
+	<link href="{% static 'main/css/authentication.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block extrajs %}
+    {% load static %}
+    <script src="{% static 'main/js/authentication.js' %}"></script>
+
+{% endblock %}

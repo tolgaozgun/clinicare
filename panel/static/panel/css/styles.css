@@ -28,17 +28,17 @@ a, a:hover, a:focus {
     transition: all 0.3s;
 }
 
-.navbar{
+.navbar {
     border-bottom: 1px solid #dee2e6;
 }
 
 
 #sidebar .sidebar-header {
     padding: 20px;
-	text-align: center;
+    text-align: center;
 }
 
-#sidebar .row{
+#sidebar .row {
     background: #6d7fcc;
 }
 
@@ -53,8 +53,8 @@ a, a:hover, a:focus {
     padding: 10px;
 }
 
-#sidebar ul li i{
-    padding-right:10px;
+#sidebar ul li i {
+    padding-right: 10px;
 }
 
 #sidebar ul li a {
@@ -72,6 +72,7 @@ a, a:hover, a:focus {
     color: #fff;
     background: #6d7fcc;
 }
+
 ul ul a {
     font-size: 0.9em !important;
     padding-left: 30px !important;
@@ -89,20 +90,39 @@ ul ul a {
 }
 
 .content {
-    padding:1em
+    padding: 1em
 }
 
-.nav-right{
-    margin:auto;
+.nav-right {
+    margin: auto;
     padding-right: 1em;
 }
 
-.nav-item{
+.nav-item {
     padding: 0.5em;
 }
 
+.cart-item {
+    padding: 1em;
+    border-bottom: 0.2em #000000;
+}
 
-.navbar .profile-dropdown.show{
+.footer-card-title{
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+.footer-card-text{
+    color: #000;
+}
+
+.shopping-cart-bottom{
+    width: 90%;
+    padding:0 5%;
+}
+
+
+.navbar .profile-dropdown.show {
     background: #d2dcde;
     transition: all 0.3s;
 }
@@ -113,13 +133,13 @@ ul ul a {
 }
 
 .no-transition {
-  -webkit-transition: none !important;
-  -moz-transition: none !important;
-  -o-transition: none !important;
-  transition: none !important;
+    -webkit-transition: none !important;
+    -moz-transition: none !important;
+    -o-transition: none !important;
+    transition: none !important;
 }
 
-.product-card{
+.product-card {
     max-width: 300px;
     max-height: 500px;
     padding: 1em;
@@ -127,14 +147,14 @@ ul ul a {
 
 .product-title {
     font-size: 1.2rem;
-    font-weight:bold;
+    font-weight: bold;
 }
 
-.product-price{
+.product-price {
     font-size: 1.5rem;
 }
 
-.product-img{
+.product-img {
     max-width: 300px;
     max-height: 300px;
 }
@@ -144,29 +164,33 @@ td {
     vertical-align: middle !important;
 }
 
-.photo-card{
-    padding:0.5em;
+.photo-card {
+    padding: 0.5em;
     background: #d2dcde;
 }
 
-footer{
+.card-contents{
+    padding: 1em;
+}
+
+footer {
     background: #d2dcde;
     padding: 2em;
 }
 
-.footer-row{
+.footer-row {
     padding: 0.5em;
 }
 
-i.social{
+i.social {
     margin: 0.5em;
 }
 
-i.social{
-  display: inline-block;
-  border-radius: 60px;
-  box-shadow: 0 0 2px #888;
-  padding: 0.5em 0.6em;
+i.social {
+    display: inline-block;
+    border-radius: 60px;
+    box-shadow: 0 0 2px #888;
+    padding: 0.5em 0.6em;
 }
 
 
@@ -184,12 +208,12 @@ a[data-toggle="collapse"] {
     position: relative;
 }
 
-.right-wrapper{
+.right-wrapper {
     width: 100%
 }
 
-.content-wrapper{
-        padding: 20px;
+.content-wrapper {
+    padding: 20px;
     background: #f4f6f9;
 }
 
@@ -201,10 +225,36 @@ a[data-toggle="collapse"] {
     transform: translateY(-50%);
 }
 
+.content-container{
+    padding: 2em;
+}
+
+.button-row{
+    height: 3em;
+    margin-bottom: 1.5em;
+    box-shadow: #1b1b1b;
+    text-align: center;
+}
+
+.button-row .btn-group > button {
+    /*border-left: ;*/
+}
+
+.card-before{
+    padding: 0 0 0 1em;
+}
+
+.confirmation-card{
+    padding: 2em;
+    margin-top: 2em;
+}
+
+
 @media (max-width: 768px) {
     #sidebar {
         margin-left: -250px;
     }
+
     #sidebar.active {
         margin-left: 0;
     }

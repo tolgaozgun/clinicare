@@ -1,0 +1,98 @@
+{% extends 'panel/base/panel_base_index.html' %}
+
+{% block title %}
+<title>Prescription - Clinicare</title>
+{% endblock %}
+
+{% block content %}
+    <div class="content-container container-fluid">
+        <nav class="mt-3" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'base:index' %}">Home</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'panel:index' %}">Control Panel</a>
+                <li class="breadcrumb-item"><a href="{% url 'panel:prescription:prescriptions' %}">Prescriptions</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Prescription #{{ prescription.id }}</li>
+            </ol>
+        </nav>
+        <div class="button-row row shadow justify-content-end align-middle">
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <a href="{% url 'panel:prescription:edit_prescription' pk=prescription.id %}">
+                    <button type="button" class="border-left btn btn-outline btn-circle btn-lg">
+                        <i class="fa fa-pencil"></i>
+                    </button>
+                </a>
+                <a href="{% url 'panel:prescription:delete_prescription' pk=prescription.id %}">
+                    <button type="button" class="border-left btn btn-outline btn-circle btn-lg">
+                        <i class="fa fa-trash"></i>
+                    </button>
+                </a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3 no-padding">
+                <div class="card photo-card">
+                    <div class="card-img">
+                        {% load static %}
+                        <img class="img-fluid" src="{% static 'avatar.png' %}">
+                    </div>
+                </div>
+            </div>
+            <div class="col card-before">
+                <div class="card">
+                    <div class="card-contents">
+                        {% if is_valid == False %}
+                            <h3 class="card-title" style="padding:0.5em">Prescription Not Found</h3>
+                        {% endif %}
+                            <div class="row">
+                                <p class="col-sm-5">Doctor:</p>
+                                <p class="col-sm-5">
+                                    <a href="{% url 'panel:doctor:doctor' pk=prescription.doctor.id %}">{{ prescription.doctor }}</a>
+                                </p>
+                            </div>
+                            <div class="row">
+                                <p class="col-sm-5">Patient:</p>
+                                <p class="col-sm-5">
+                                    <a href="{% url 'panel:patient:patient' pk=prescription.patient.id %}">{{ prescription.patient }}</a>
+                                </p>
+                            </div>
+                            <div class="row">
+                                <p class="col-sm-5">Drugs:</p>
+                                <p class="col-sm-5">{{ prescription.drugs }}</p>
+                            </div>
+                            <div class="row">
+                                <p class="col-sm-5">Files:</p>
+
+                                <div class="col-sm-5">
+                                    <div class="row">
+                                        {% for attachment in prescription.files %}
+                                            <div class="col-sm-3">
+                                                <a href="{{ attachment.file.url }}" target="_blank">
+                                                    <div class="embed-responsive embed-responsive-1by1 text-center">
+                                                        {% load static %}
+                                                        <img style="max-height: 100px; max-width: 100px;" class="embed-responsive-item" src="{% static 'attachment.png' %}">
+                                                        <span class="text-white">File {{ attachment.id }}</span>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <p class="col-sm-5">Last Updated:</p>
+                                <p class="col-sm-5">{{ prescription.lastUpdated }}</p>
+                            </div>
+                            <div class="row">
+                                <p class="col-sm-5">Prescription Created:</p>
+                                <p class="col-sm-5">{{ prescription.dateCreated }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+
+        </div>
+    </div>
+{% endblock %}

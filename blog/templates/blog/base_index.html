@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% block title %}<title>Clinicare</title>{% endblock %}
+
+    <!-- Bootstrap -->
+      {%  load static %}
+    <link href="{% static 'base/css/bootstrap-4.4.1.css' %}" rel="stylesheet">
+	<link href="{% static 'panel/css/styles.css' %}" rel="stylesheet">
+	<link href="{% static 'base/fontawesome/css/all.css' %}" rel="stylesheet">
+    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
+    {% block extracss %} {% endblock %}
+  </head>
+  <body>
+	<div class="wrapper">
+        <div class="right-wrapper">
+            {% block navbar %}
+                {% include 'blog/main_navbar.html' %}
+            {% endblock %}
+
+            {% block messages %}
+                {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                            <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endblock %}
+
+            {% block content %}
+                {% include 'blog/main_base_content.html' %}
+            {% endblock %}
+
+            {% block footer %}
+                {% include 'blog/main_footer.html'%}
+            {% endblock %}
+
+        </div>
+	</div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="{% static 'base/js/jquery-3.4.1.min.js' %}">
+
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="{% static 'base/js/popper.min.js' %}"></script>
+    <script src="{% static 'base/js/bootstrap-4.4.1.js' %}"></script>
+    {% block extrajs %}{% endblock %}
+  </body>
+</html>

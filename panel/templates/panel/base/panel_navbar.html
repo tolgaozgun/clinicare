@@ -1,6 +1,7 @@
 <nav class="navbar navbar-expand navbar-light bg-light">
     <a class="navbar-brand" href="{% url "base:index"%}">
-        <img src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+        {% load static %}
+        <img src="{% static 'favicon.ico' %}" width="30" height="30" class="d-inline-block align-top" alt="">
         Clinicare
     </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -8,28 +9,21 @@
   </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
+            <li class="nav-item active">
                 <a class="nav-link" href="{% url 'base:index' %}">Home</a>
             </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="{% url 'dashboard' %}">Control Panel</a>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'panel:index' %}">Control Panel</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'blog:index' %}">Blog</a>
             </li>
         </ul>
         <ul class="navbar-nav">
             {% if request.user.is_authenticated %}
                 <li class="nav-item nav-right">
-                        <div class="dropdown">
-                            <a class="no-transition no-hover" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span>Shopping Cart</span>
-                                <i class="fa fa-shopping-cart"></i>
-                                <div class="dropdown-menu dropdown-menu-lg-right" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="#">Edit Profile</a>
-                                    <a class="dropdown-item" href="#">Settings</a>
-                                    <a class="dropdown-item" href="#">Help & Support</a>
-                                    <a class="dropdown-item" href="{% url 'accounts:logout' %}">Logout</a>
-                                </div>
-                            </a>
-                        </div>
+                    <a href="{% url 'cart:cart' %}">Shopping Cart</a>
+                    <i class="fa fa-shopping-cart"></i>
                 </li>
                 <li class="nav-item">
                     <div class="dropdown profile-dropdown">

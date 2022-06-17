@@ -1,0 +1,14 @@
+
+{% extends 'main/main_base_index.html' %}
+
+{% block content %}
+    <div style="padding: 4em">
+        {% if success %}
+            <h2>Congratulations!</h2>
+            {{ user.first_name }}, your account is confirmed!
+        {% else %}
+            <h2>Sorry...</h2>
+            Error, invalid token!
+        {% endif %}
+    </div>
+{% endblock %}

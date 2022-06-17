@@ -5,5 +5,56 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Index Page</h1>
+    <div class="container">
+        <center>
+            <br/>
+            <div class="row">
+                <div class="col">
+                    <h2>Clinicare</h2>
+                    <p>We care about your health</p>
+                </div>
+            </div>
+
+            <br/>
+            <div class="row">
+                <div class="col">
+                    <h2>Our Services</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="card" style="width: 18rem;">
+                        {% load static %}
+                        <img class="card-img-top" style="max-height: 140px" src="{% static 'panel/clinic1.jpg' %}" alt="Card image cap">
+                        <div class="card-body">
+                        <h5 class="card-title">7/24 Care</h5>
+                        <p class="card-text">We are available for call 7/24. You will be given a personal assistant to call anytime you want.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card" style="width: 18rem;">
+                        {% load static %}
+                        <img class="card-img-top" style="max-height: 140px" src="{% static 'panel/clinic2.jpg' %}" alt="Card image cap">
+                        <div class="card-body">
+                        <h5 class="card-title">Online accessibility</h5>
+                        <p class="card-text">We know how important it is for you to access your data anytime, anywhere. You can do it online.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card" style="width: 18rem;">
+                        {% load static %}
+                        <img class="card-img-top" style="max-height: 140px" src="{% static 'panel/clinic3.jpg' %}" alt="Card image cap">
+                        <div class="card-body">
+                        <h5 class="card-title">Smiling Faces</h5>
+                        <p class="card-text">We are always smiling to have you here. We assure that you will be given the most hospitable care.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <br/>
+        </center>
+    </div>
 {% endblock %}

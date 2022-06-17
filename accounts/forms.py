@@ -1,5 +1,5 @@
 from django import forms
-from panel.models import User
+from accounts.models import User
 import phonenumbers
 from captcha.fields import ReCaptchaField
 from captcha.widgets import ReCaptchaV2Checkbox
@@ -24,6 +24,23 @@ class LoginForm(forms.Form):
             self.fields[key].widget.attrs['class'] = 'form-control'
 
 
+class ActivateForm(forms.Form):
+    email = forms.EmailField(widget=forms.EmailInput)
+    captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox())
+
+    def clean(self):
+        pass
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        placeholders = {
+            'email': 'example@email.com',
+        }
+        for key, value in placeholders.items():
+            self.fields[key].widget.attrs['placeholder'] = value
+            self.fields[key].widget.attrs['class'] = 'form-control'
+
+
 class RegisterForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput(render_value=True))
     confirmPassword = forms.CharField(widget=forms.PasswordInput(render_value=True))
@@ -32,7 +49,10 @@ class RegisterForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'email', 'phone']
+        fields = ['first_name', 'last_name', 'email', 'role', 'phone', 'photo']
+        widgets = {
+            'role': forms.NumberInput(attrs={'hidden': ''})
+        }
 
     def clean(self):
         super(RegisterForm, self).clean()
