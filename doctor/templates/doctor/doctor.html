@@ -22,6 +22,12 @@
                         <img class="img-fluid" src="{{ doctor.photo.url }}">
                     </div>
                 </div>
+                <div class="mt-5">
+                    <a style="width: 19.5em" href="{% url 'panel:appointment:dr_add_appointment' pk=doctor.id %}" class="btn btn-info btn-outline btn-circle btn-lg" data-toggle="tooltip" title="Book an Appointment">
+                        <i class="fa-solid fa-calendar-check ambitious-padding-btn"></i>
+                        Book an Appointment
+                    </a>
+                </div>
             </div>
             <div class="col">
                 <div class="card" style="padding:1em">

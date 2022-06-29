@@ -6,11 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {% block title %}<title>Clinic Template</title>{% endblock %}
 
-    <!-- Bootstrap -->
-      {%  load static %}
+    {%  load static %}
     <link href="{% static 'base/css/bootstrap-4.4.1.css' %}" rel="stylesheet">
 	<link href="{% static 'panel/css/styles.css' %}" rel="stylesheet">
 	<link href="{% static 'base/fontawesome/css/all.css' %}" rel="stylesheet">
+    {% block extracss %}{% endblock %}
     <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
 
   </head>
@@ -30,10 +30,8 @@
             {% endblock %}
         </div>
 	</div>
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="{% static 'base/js/jquery-3.4.1.min.js' %}">
-
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="{% static 'base/js/jquery-3.4.1.min.js' %}"></script>
+    {% block extrajs %}{% endblock %}
     <script src="{% static 'base/js/popper.min.js' %}"></script>
     <script src="{% static 'base/js/bootstrap-4.4.1.js' %}"></script>
   </body>

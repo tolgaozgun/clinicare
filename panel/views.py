@@ -12,3 +12,9 @@ class DashboardView(PanelView):
     def get(self, request):
         context = {'current_page': 'home'}
         return render(request, 'panel/dashboard.html', context)
+
+
+class MessagingView(PanelView):
+    def get(self, request):
+        context = {'current_page': 'messaging'}
+        return render(request, 'panel/messaging.html', context)

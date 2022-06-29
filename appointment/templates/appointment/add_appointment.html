@@ -4,38 +4,127 @@
 {% block content %}
     <div class="authentication-wrapper">
         <div class="container">
-        <nav class="mt-3" aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{% url 'base:index' %}">Home</a></li>
-                <li class="breadcrumb-item"><a href="{% url 'panel:appointment:appointments' %}">Appointments</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Book an Appointment</li>
-            </ol>
-        </nav>
+            <nav class="mt-3" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'base:index' %}">Home</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'panel:appointment:appointments' %}">Appointments</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Book an Appointment</li>
+                </ol>
+            </nav>
             <div class="row justify-content-center">
-                    <div class="card col-md-8">
-                        <form class="active" method="POST" action="">
-                            {% csrf_token %}
-                            <div class="form-group">
-                                {{ form.doctor.errors }}
-                                <label for="{{ form.doctor.id_for_label }}">Doctor</label>
-                                {{ form.doctor }}
+                <div class="card col-md-12" style="padding:1em">
+                    <form class="active" method="POST" action="">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            {{ form.doctor.errors }}
+                            <label for="{{ form.doctor.id_for_label }}">Doctor</label>
+                            {{ form.doctor }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.patient.errors }}
+                            <label for="{{ form.patient.id_for_label }}">Patient</label>
+                            {{ form.patient }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.appointmentDate.errors }}
+                            <label for="{{ form.appointmentDate.id_for_label }}">Appointment Date</label>
+                            {{ form.appointmentDate }}
+                        </div>
+                        <div class="card" style="padding: 1em">
+                            <div class="row">
+                                <div id="ap-month-sub" class="col float-left ml-2">
+                                    <i class="fa fa-chevron-left"></i>
+                                </div>
+                                <div id="ap-month-val" class="col" style="text-align: center">
+                                    2022
+                                </div>
+                                <div id="ap-month-add" class="col float-right mr-2" style="text-align: end">
+                                    <i class="fa fa-chevron-right"></i>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                {{ form.patient.errors }}
-                                <label for="{{ form.patient.id_for_label }}">Patient</label>
-                                {{ form.patient }}
-                            </div>
-                            <div class="form-group">
-                                {{ form.appointmentDate.errors }}
-                                <label for="{{ form.appointmentDate.id_for_label }}">Appointment Date</label>
-                                {{ form.appointmentDate }}
-                            </div>
-                            <div class="form-group">
-                                {{ form.captcha.errors }}
-                                <label for="{{ form.captcha.id_for_label }}">Captcha</label>
-                                {{ form.captcha }}
-                            </div>
-                            <button class="btn btn-primary btn-block waves-effect waves-light" type="submit">Register</button>
+                            <table class="ap-month show" id="ap-month">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <button type="button" class="btn btn-primary ap-month-btn">January</button>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-primary ap-month-btn">February</button>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-primary ap-month-btn">March</button>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-primary ap-month-btn">April</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <button type="button" class="btn btn-primary ap-month-btn">May</button>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-primary ap-month-btn">June</button>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-primary ap-month-btn">July</button>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-primary ap-month-btn">August</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <button type="button" class="btn btn-primary ap-month-btn">September</button>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-primary ap-month-btn">October</button>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-primary ap-month-btn">November</button>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-primary ap-month-btn">December</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table class="ap-calendar mt-3" id="ap-calendar">
+                                <thead>
+                                    <tr>
+                                        <td scope="col">Dates</td>
+                                        {% for date in days.dates %}
+                                        <td scope="col" class="ap-calendar-date">{{ date }}</td>
+                                        {% endfor %}
+                                    </tr>
+                                    <tr>
+                                        <th scope="col">Days</th>
+                                        {% for name in days.names %}
+                                        <th scope="col">{{ name  }}</th>
+                                        {% endfor %}
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for time in times %}
+                                    <tr>
+                                        <th scope="row">
+                                            ->
+                                        </th>
+                                        {% for day in days.names %}
+                                            <td class="ap-calendar-time active">
+                                                <button type="button" class="btn btn-primary ap-calendar-btn" style="width: 5em">{{ time }}</button>
+                                            </td>
+                                        {% endfor %}
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="form-group">
+                            {{ form.captcha.errors }}
+                            <label for="{{ form.captcha.id_for_label }}">Captcha</label>
+                            {{ form.captcha }}
+                        </div>
+                        <button class="btn btn-primary btn-block waves-effect waves-light" type="submit">Book</button>
                         </form>
                         </div>
                     </div>
@@ -43,4 +132,71 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block extrajs %}
+<script>
+    const buttons = document.getElementsByClassName("ap-calendar-btn");
+    let previousSelected;
+    for (let i = 0; i < buttons.length; i++) {
+        let item = buttons.item(i);
+        item.addEventListener("click", function (event) {
+            if (previousSelected !== undefined) {
+                previousSelected.classList.remove("selected")
+            }
+            item.classList.add("selected")
+            previousSelected = item;
+        });
+    }
+</script>
+<script>
+
+    const addYearButton = document.getElementById("ap-month-add");
+    const subYearButton = document.getElementById("ap-month-sub");
+    const yearDisplay = document.getElementById("ap-month-val");
+
+    const monthButtons = document.getElementsByClassName("ap-month-btn");
+    const monthCalendar = document.getElementById("ap-month");
+    const dayCalendar = document.getElementById("ap-calendar");
+    const dateElements = document.getElementsByClassName("ap-calendar-date");
+    const appointmentButtons = document.getElementsByClassName("ap-calendar-btn");
+    let year = 2022;
+    let weekStart;
+
+    addYearButton.addEventListener("click", function(event){
+        year += 1;
+        yearDisplay.innerHTML = year;
+    })
+
+    subYearButton.addEventListener("click", function (event){
+        year -= 1;
+        yearDisplay.innerHTML = year;
+    })
+
+    let previousSelectedMonth;
+    for(let i = 0; i < monthButtons.length; i++){
+        let item = monthButtons.item(i);
+        item.addEventListener("click", function(event){
+            if(previousSelectedMonth !== undefined){
+                previousSelectedMonth.classList.remove("selected")
+            }
+            item.classList.add("selected");
+            previousSelectedMonth = item;
+            dayCalendar.classList.add("show")
+            weekStart = getWeekStart(new Date(year, i, 1))
+            for(let j = 0; j < dateElements.length; j++){
+                let weekDate = new Date(weekStart);
+                weekDate.setDate(weekDate.getDate() + j);
+                dateElements.item(j).innerHTML = weekDate.toLocaleDateString("en-GB");
+            }
+        })
+    }
+
+    function getWeekStart(date){
+        const startDay = 1; // Week starts on Monday
+        let newDate = new Date(date);
+        newDate.setDate(newDate.getDate() -  ((date.getDay() - startDay) % 7));
+        return newDate;
+    }
+</script>
 {% endblock %}

@@ -16,6 +16,10 @@
 
 			<a href="{%url 'panel:dashboard'%}"><i class="fa-solid fa-gauge"></i>Dashboard</a>
 		</li>
+		<li class="{% if current_page == "messaging" %} active {% endif %}">
+
+			<a href="{%url 'panel:messaging'%}"><i class="fa-solid fa-gauge"></i>Dashboard</a>
+		</li>
 		<li class="{% if current_page == "doctors" or current_page == "view_doctor" or current_page == "add_doctor" or current_page == "edit_doctor" %} active {% endif %}">
 			<a href="#doctorsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa-solid fa-user-doctor"></i>Doctors</a>
 			<ul class="collapse list-unstyled" id="doctorsSubmenu">

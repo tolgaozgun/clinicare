@@ -249,6 +249,96 @@ a[data-toggle="collapse"] {
     margin-top: 2em;
 }
 
+.ap-calendar-header{
+    display: none;
+}
+
+.ap-calendar-header.show{
+    text-align: center;
+    display: table;
+}
+
+.ap-calendar{
+    display: none;
+}
+
+.ap-calendar.show{
+    text-align: center;
+    display: table;
+}
+
+.ap-month.show{
+    display: table;
+}
+
+#ap-header-sub i{
+    display: table;
+}
+
+#ap-header-val i{
+    display: table;
+}
+
+.btn-counter:hover{
+    color: red
+}
+
+.ap-month{
+    text-align: center;
+    display: none;
+}
+
+.ap-month-btn.selected{
+    color: #fff;
+    background: #007bff;
+}
+
+.ap-calendar-time .unavailable{
+    background-color: gray;
+    border-color: gray;
+}
+
+.ap-calendar-time .unavailable:hover{
+    background-color: gray;
+    border-color: gray;
+}
+
+.ap-calendar-time .available{
+    background-color: green;
+    border-color: green;
+}
+
+.ap-calendar-time .available:hover{
+    background-color: #fff;
+    color: green;
+    border-color: green;
+}
+
+.ap-calendar-time .available.selected{
+    background-color: #fff;
+    color: green;
+    border-color: green;
+}
+
+.ap-calendar-title{
+    font-size: 2em;
+}
+
+.ap-month td{
+    text-align: center;
+}
+
+.ap-month-btn{
+    width:10em;
+    background-color: #fff;
+    color: #007bff;
+}
+
+
+.ap-calendar-time .selected{
+    color: #007bff;
+    background-color: #fff;
+}
 
 @media (max-width: 768px) {
     #sidebar {

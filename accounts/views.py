@@ -73,7 +73,7 @@ class RegisterView(View):
                             dateCreated=now)
             send_email(new_user)
             new_user.save()
-            messages.info("Register successful!")
+            messages.info(request, "Register successful!")
             return render(request, "accounts/register.html", {'form': form})
         else:
             return render(request, "accounts/register.html", {'form': form})

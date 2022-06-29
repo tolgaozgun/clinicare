@@ -1,11 +1,12 @@
 from django.urls import path, include
-from panel.views import DashboardView
+from panel.views import DashboardView, MessagingView
 
 app_name = "panel"
 
 urlpatterns = [
     path("", DashboardView.as_view(), name="index"),
     path("dashboard", DashboardView.as_view(), name="dashboard"),
+    path("messaging", MessagingView.as_view(), name="messaging"),
 
     path("doctors/", include('doctor.urls'), name="doctor"),
     path("patients/", include('patient.urls'), name="patient"),
