@@ -28,24 +28,19 @@ SECRET_KEY = os.environ["SECRET_KEY"]
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['92.205.25.135']
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
 
 INSTALLED_APPS = [
     'panel',
-    'base',
     'blog',
-    'prescription',
-    'product',
-    'report',
-    'doctor',
-    'patient',
-    'appointment',
     'accounts',
     'captcha',
     'cart',
+    'chat',
+    'channels',
     'djmoney',
     'django_email_verification',
     'bootstrap4',
@@ -92,11 +87,14 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'clinic.wsgi.application'
-ASGI_APPLICATION = 'clinic.asgi.application'
+ASGI_APPLICATION = 'chat.asgi.application'
 
 CHANNEL_LAYERS = {
     'default': {
-        "BACKEND": "channels.layers.InMemoryChannelLayer"
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        'CONFIG': {
+            "hosts": [('clinic_redis', 6379)],
+        },
     }
 }
 

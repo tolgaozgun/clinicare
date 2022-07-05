@@ -19,16 +19,19 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django_email_verification import urls as email_urls
 
+from clinic.views import IndexView
+
 app_name = "clinic"
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path("", IndexView.as_view(), name="index"),
     path('', include('accounts.urls'), name="accounts"),
-    path('', include('base.urls'), name="base"),
+    path('admin/', admin.site.urls),
     path('panel/', include('panel.urls'), name="panel"),
     path('blog/', include('blog.urls'), name="blog"),
     path('email/', include(email_urls)),
-    path('cart/', include('cart.urls'), name="cart")
+    path('cart/', include('cart.urls'), name="cart"),
+    path('chat/', include('chat.urls'), name="chat"),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

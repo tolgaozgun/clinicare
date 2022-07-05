@@ -1,6 +1,7 @@
 from accounts.models import User
 from django.db import models
-from product.models import Product
+
+from panel.models import Product
 
 
 class Cart(models.Model):

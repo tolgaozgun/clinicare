@@ -3,8 +3,9 @@ from clinic.settings import SHIPPING_COST, SHIPPING_FREE_AFTER
 from django.shortcuts import render, redirect
 from django.utils.timezone import now
 from moneyed import Money
+
+from panel.models import Product
 from panel.views import PanelView
-from product.models import Product
 
 
 class ShoppingCartView(PanelView):

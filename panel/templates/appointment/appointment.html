@@ -1,0 +1,50 @@
+{% extends 'panel/base/panel_base_index.html' %}
+
+{% block title %}
+<title>Doctor - Clinicare</title>
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-3">
+                <div class="card photo-card">
+                    <div class="card-img">
+                        {% load static %}
+                        <img class="img-fluid" src="{{ doctor.photo.url }}">
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card" style="padding:1em">
+                    {% if not is_valid %}
+                        <h3 class="card-title" style="padding:0.5em">Doctor Not Found</h3>
+                    {% endif %}
+                        <div class="row">
+                            <p class="col-sm-5">Doctor:</p>
+                            <p class="col-sm-5">Dr. {{ appointment.doctor.first_name }} {{ appointment.doctor.last_name }}</p>
+                        </div>
+                        <div class="row">
+                            <p class="col-sm-5">Patient:</p>
+                            <p class="col-sm-5">{{ appointment.patient.first_name }} {{ appointment.patient.last_name }}</p>
+                        </div>
+                        <div class="row">
+                            <p class="col-sm-5">Appointment Date:</p>
+                            <p class="col-sm-5">{{ appointment.appointmentDate }}</p>
+                        </div>
+                        <div class="row">
+                            <p class="col-sm-5">Date Created:</p>
+                            <p class="col-sm-5">{{ appointment.dateCreated }}</p>
+                        </div>
+                        <div class="row">
+                            <p class="col-sm-5">Last Updated:</p>
+                            <p class="col-sm-5">{{ appointment.lastUpdated }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+
+            </div>
+    </div>
+{% endblock %}

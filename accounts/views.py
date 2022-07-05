@@ -12,7 +12,7 @@ from django_email_verification import send_email
 class LogoutView(View):
     def get(self, request):
         logout(request)
-        return redirect('base:index')
+        return redirect('index')
 
 
 class LoginView(View):
@@ -37,7 +37,7 @@ class LoginView(View):
             if user is not None:
                 if user.is_active:
                     login(request, user)
-                    return redirect('base:index')
+                    return redirect('index')
                 else:
                     messages.error(request, "Your account is not activated!")
                     return render(request, "accounts/login.html", {'form': form})

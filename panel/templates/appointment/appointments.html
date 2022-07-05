@@ -1,0 +1,94 @@
+{% extends 'panel/base/panel_base_index.html' %}
+
+{% block title %}
+<title>Appointments - Clinicare</title>
+{% endblock %}
+
+{% block content %}
+    <div class="content-wrapper">
+        <div class="container-fluid">
+            <section class="container-header">
+                <h2>Appointments</h2>
+            </section>
+            <nav class="mt-3" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'panel:index' %}">Control Panel</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Appointments</li>
+                </ol>
+            </nav>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Appointment List</h3>
+                            <div class="card-tools">
+                                <button class="btn btn-primary" data-toggle="collapse" href="#filter">
+                                    <i class="fa fa-filter"></i> Filter
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Doctor</th>
+                                        <th scope="col">Patient</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Created</th>
+                                        <th scope="col">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {% for appointment in appointments %}
+                                    <tr>
+                                        <th scope="row">{{ appointment.id }}</th>
+                                        <td>{{ appointment.doctor.first_name }} {{ appointment.doctor.last_name }}</td>
+                                        <td>{{ appointment.patient.first_name }} {{ appointment.patient.last_name }}</td>
+                                        <td>{{ appointment.appointmentDate }}</td>
+                                        <td>{{ appointment.dateCreated }}</td>
+                                        <td>
+                                            <a href="{% url 'panel:appointment' pk=appointment.id%}" class="btn btn-info btn-outline btn-circle btn-lg" data-toggle="tooltip" title="View">
+                                                <i class="fa fa-eye ambitious-padding-btn"></i>
+                                            </a>
+                                            <a href="{% url 'panel:edit_appointment' pk=appointment.id %}" class="btn btn-info btn-outline btn-circle btn-lg" data-toggle="tooltip" title="Edit">
+                                                <i class="fa fa-pencil ambitious-padding-btn"></i>
+                                            </a>
+                                            <a href="{% url 'panel:delete_appointment' pk=appointment.id %}" class="btn btn-info btn-outline btn-circle btn-lg" data-toggle="tooltip" title="Delete">
+                                                <i class="fa fa-trash ambitious-padding-btn"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          <ul class="pagination">
+            {% if appointments.has_previous %}
+              <li class="page-item"><a class="page-link" href="?page={{ appointments.previous_page_number }}">&laquo;</a></li>
+            {% else %}
+              <li class="page-item disabled"><a class="page-link">&laquo;</a></li>
+            {% endif %}
+            {% for i in appointments.paginator.page_range %}
+              {% if appointments.number == i %}
+                <li class="page-item active"><a class="page-link">{{ i }} <span class="sr-only">(current)</span></a></li>
+              {% else %}
+                <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+              {% endif %}
+            {% endfor %}
+            {% if appointments.has_next %}
+              <li class="page-item"><a class="page-link" href="?page={{ appointments.next_page_number }}">&raquo;</a></li>
+            {% else %}
+              <li class="page-item disabled"><a class="page-link">&raquo;</a></li>
+            {% endif %}
+          </ul>
+
+
+
+        </div>
+    </div>
+{% endblock %}
