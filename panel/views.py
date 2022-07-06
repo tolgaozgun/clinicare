@@ -23,9 +23,13 @@ class DashboardView(PanelView):
         return render(request, 'panel/dashboard.html', context)
 
 
+# Chat Views
+
+
 class MessagingView(PanelView):
     def get(self, request):
-        context = {'current_page': 'messaging'}
+        chats = []
+        context = {'current_page': 'messaging', 'chats': chats}
         return render(request, 'panel/messaging.html', context)
 
 

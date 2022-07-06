@@ -1,8 +1,11 @@
+import json
+from collections import OrderedDict
+
+from clinic.settings import BLOG_POST_SUGGESTIONS
 from blog.forms import BlogPostForm
 from blog.models import BlogPost
 from django.shortcuts import render, redirect
-
-# Create your views here.
+from django.core.management import call_command
 from django.utils.timezone import now
 from django.views import View
 from panel.views import PanelView
@@ -21,7 +24,16 @@ class PostView(View):
             post = BlogPost.objects.get(id=pk)
         except BlogPost.DoesNotExist:
             post = None
-        context = {'post': post}
+        similarities = json.loads(post.similarity)
+        top_similarities = get_top_similarities(similarities)
+        posts = []
+        for similar in top_similarities:
+            try:
+                post = BlogPost.objects.get(id=similar)
+            except BlogPost.DoesNotExist:
+                print("error: blog post not found %s" % similar)
+            posts.append(post)
+        context = {'post': post, 'similar_posts': posts}
         return render(request, 'blog/post.html', context)
 
 
@@ -42,6 +54,7 @@ class AddPostView(PanelView):
                             lastUpdated=now,
                             dateCreated=now)
             post.save()
+            call_command('blog_get_wordlist', post.id)
             return redirect('blog:posts')
         else:
             context = {"current_page": "add_post", "form": form}
@@ -87,4 +100,8 @@ class DeletePostView(PanelView):
         post.delete()
         return redirect('blog:posts')
 
+
+def get_top_similarities(data):
+    n = BLOG_POST_SUGGESTIONS
+    return OrderedDict(sorted(data.items())[:n])
 

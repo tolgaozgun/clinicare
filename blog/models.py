@@ -11,6 +11,9 @@ class BlogPost(models.Model):
     lastUpdated = models.DateTimeField(auto_now=True)
     image = models.ImageField(upload_to="blog", default="blog/default.png")
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="blogpost_author")
+    related_posts = models.ManyToManyField("BlogPost")
+    word_list = models.TextField()
+    similarity = models.TextField()
 
 
 class BlogCategory(models.Model):

@@ -21,35 +21,48 @@
     </nav>
     <div class="row">
         <div class="col">
-                <a href="{% url 'blog:post' pk=post.id %}">
-                    <div class="container-fluid blog-card">
-                        <div class="row">
-                            <div class="col">
-                                <img style="max-width: 620px; max-height: 400px" src="{{ post.image.url }}">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <span class="blog-card-title">{{ post.title }}</span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <span class="blog-card-text">{{ post.text }}</span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <a href="{% url 'blog:edit_post' pk=post.id %}" class="btn btn-info btn-outline btn-circle btn-lg" data-toggle="tooltip" title="Edit">
-                                    <i class="fa fa-pencil ambitious-padding-btn"></i>
-                                </a>
-                                <a href="{% url 'blog:delete_post' pk=post.id %}" class="btn btn-info btn-outline btn-circle btn-lg" data-toggle="tooltip" title="Delete">
-                                    <i class="fa fa-trash ambitious-padding-btn"></i>
-                                </a>
-                            </div>
-                        </div>
+            <div class="container-fluid blog-card">
+                <div class="row">
+                    <div class="col">
+                        <img style="max-width: 620px; max-height: 400px" src="{{ post.image.url }}">
                     </div>
-                </a>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <span class="blog-card-title">{{ post.title }}</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <span class="blog-card-text">{{ post.text }}</span>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col">
+                        <a href="{% url 'blog:edit_post' pk=post.id %}" class="btn btn-info btn-outline btn-circle btn-lg" data-toggle="tooltip" title="Edit">
+                            <i class="fa fa-pencil ambitious-padding-btn"></i>
+                        </a>
+                        <a href="{% url 'blog:delete_post' pk=post.id %}" class="btn btn-info btn-outline btn-circle btn-lg" data-toggle="tooltip" title="Delete">
+                            <i class="fa fa-trash ambitious-padding-btn"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <h3>Similar Posts</h3>
+                </div>
+                <div class="row mt-3">
+                    {% for similar_post in similar_posts %}
+                    <div class="col">
+                        <a href="{% url 'blog:post' similar_post.id %}">
+                            <img src="{{ similar_post.image.url }}">
+                            <br>
+                            <span>{{similar_post.title}}</span>
+                            <p>{{similar_post.description}}</p>
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
         </div>
     </div>
     </div>
