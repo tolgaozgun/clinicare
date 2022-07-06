@@ -54,7 +54,7 @@
                     {% for similar_post in similar_posts %}
                     <div class="col">
                         <a href="{% url 'blog:post' similar_post.id %}">
-                            <img src="{{ similar_post.image.url }}">
+                            <img style="max-width: 300px; max-height: 200px" src="{{ similar_post.image.url }}">
                             <br>
                             <span>{{similar_post.title}}</span>
                             <p>{{similar_post.description}}</p>
